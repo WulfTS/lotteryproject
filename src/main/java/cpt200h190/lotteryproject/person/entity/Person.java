@@ -33,8 +33,6 @@ public class Person {
 
     private String phoneNumber;
 
-
-    // selective constructor;
     public Person(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
