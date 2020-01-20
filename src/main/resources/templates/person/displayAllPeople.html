@@ -12,6 +12,9 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Active?</th>
+            <th>View</th>
+            <th>Update</th>
         </tr>
 
         <tr th:each="person: ${peopleList}">
@@ -20,8 +23,12 @@
             <td th:text="${person.lastName}"/>
             <td th:text="${person.email}"/>
             <td th:text="${person.phoneNumber}"/>
+            <td th:text="${person.isActive}"/>
             <td>
-                <a th:href="${'/person/' + {person.id}}">view</a>
+                <a th:href="${'/person/' + {person.id}}">View</a>
+            </td>
+            <td>
+                <a th:href="${'/person/' + {person.id}} + '/update'">Update</a>
             </td>
         </tr>
     </table>

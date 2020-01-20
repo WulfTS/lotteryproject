@@ -10,6 +10,8 @@ public interface PersonDelegate {
 
     PersonDTO addPerson(PersonDTO personToAdd);
 
+    PersonDTO editPerson(PersonDTO personUpdates);
+
     void deletePersonById(Long id);
 
     PersonDTO findPersonById(Long id);

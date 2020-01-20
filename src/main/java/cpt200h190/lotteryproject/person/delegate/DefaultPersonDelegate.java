@@ -34,6 +34,13 @@ public class DefaultPersonDelegate implements PersonDelegate {
     }
 
     @Override
+    public PersonDTO editPerson(PersonDTO personUpdates) {
+        Person person = personMapper.mapPersonDTOtoPerson(personUpdates);
+
+        return personMapper.mapPersonToPersonDTO(personService.editPerson(person));
+    }
+
+    @Override
     public void deletePersonById(Long id) {
         personService.deletePersonById(id);
     }

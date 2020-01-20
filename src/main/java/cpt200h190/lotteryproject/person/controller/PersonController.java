@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -19,7 +18,7 @@ public class PersonController {
 
     // display main homepage
     @GetMapping(value = "/")
-    public String homepage(HttpServletRequest request, Model model){
+    public String homepage(Model model){
 
         return "homepage";
     }
@@ -31,15 +30,23 @@ public class PersonController {
         return "person/peopleHome";
     }
 
-    // Add a person to the database
-    @PostMapping("/people")
-    public PersonDTO newPerson(@RequestBody PersonDTO personToAdd){
-        return personDelegate.addPerson(personToAdd);
+    // display person form
+    @GetMapping("people/add")
+    public String displayPersonForm(){
+        return "person/personForm";
+    }
+
+    // Add a person to the database  Display person form with newly added data
+    @PostMapping("/people/add")
+    public String addPersonByDto(@ModelAttribute("person") PersonDTO personDTO, Model model) {
+        PersonDTO result = personDelegate.addPerson(personDTO);
+        model.addAttribute("person", result);
+        return "person/displayPerson";
     }
 
     // list all people in database
     @GetMapping(value="/person")
-    public String displayPeople(HttpServletRequest request, Model model){
+    public String displayPeople(Model model){
         List<PersonDTO> peopleList = personDelegate.getAllPeople();
         model.addAttribute("peopleList",peopleList);
         return "person/displayAllPeople";
@@ -52,5 +59,22 @@ public class PersonController {
         model.addAttribute("person", person);
         return "person/displayPerson";
     }
+
+    //Display update form
+    @GetMapping(value="/person/{id}/update")
+    public String displayUpdateForm(@PathVariable Long id,  Model model){
+        model.addAttribute("existingPerson", personDelegate.findPersonById(id));
+        return "person/personUpdateForm";
+    }
+
+    // actually update person
+    @PostMapping(value ="/person/" )
+    public String updatePersonData( @ModelAttribute("personUpdate") PersonDTO personDTO, Model model){
+        PersonDTO result = personDelegate.editPerson(personDTO);
+        model.addAttribute("person",result);
+        return "person/displayPerson";
+    }
+
+
 
 }

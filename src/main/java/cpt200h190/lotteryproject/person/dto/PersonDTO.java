@@ -1,35 +1,32 @@
 package cpt200h190.lotteryproject.person.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class PersonDTO {
-    @NotNull
+
     @JsonProperty
     private Long id;
 
-    @NotNull
     @JsonProperty
     private String firstName;
 
-    @NotNull
     @JsonProperty
     private String lastName;
 
-    @NotNull
     @JsonProperty
     private String email;
 
     @JsonProperty
     private String phoneNumber;
 
-
-
-
+    @JsonProperty
+    private Boolean isActive;
 }

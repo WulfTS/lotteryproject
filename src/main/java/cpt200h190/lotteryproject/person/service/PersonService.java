@@ -9,7 +9,11 @@ public interface PersonService {
 
     Person addPerson(Person personToAdd);
 
+    Person editPerson(Person personToEdit);
+
     void deletePersonById(Long id);
 
     Person findPersonById(Long id);
+
+    Boolean idIsPresent(Long id);
 }

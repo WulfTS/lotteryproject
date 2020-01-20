@@ -1,22 +1,50 @@
 <!DOCTYPE html>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<html xmlns:th="http://thymeleaf.org" xmlns:form="">
+
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1> Person Form</h1>
-    <form : form method = POST
-        action = "/people" modelAttribut = "person">
+    <form method="post" action="/people/add" modelAttribute="person">
+        <h1> Person Form</h1>
         <table>
             <tr>
-                <td><form: label path = "name"> Name </form:>label</td>
-                <td><form: input path = "name"/></td>
+                <td>
+                    <label>First Name: </label>
+                     <input type="text" name="firstName">
+                </td>
+            </tr>
+            <tr
+                ><td>
+                    <label> Last Name: </label>
+                    <input type="text" name="lastName">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label> Email </label>
+                    <input type="text" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Phone</label>
+                    <input type="text" name="phone">
+                </td></tr>
+
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                    <button type = "reset">Reset</button>
+                </td>
             </tr>
         </table>
 
     </form>
+
+
+
 
 </body>
 </html>

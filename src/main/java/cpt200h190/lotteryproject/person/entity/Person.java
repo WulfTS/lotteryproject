@@ -33,17 +33,22 @@ public class Person {
 
     private String phoneNumber;
 
+    @NotNull
+    private Boolean isActive;
+
     public Person(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        isActive = Boolean.TRUE;
     }
 
     public Person(String firstName, String lastName, String email){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        isActive = Boolean.TRUE;
     }
 
 }
