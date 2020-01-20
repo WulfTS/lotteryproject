@@ -28,7 +28,7 @@ public class DefaultPersonDelegate implements PersonDelegate {
     }
 
     @Override
-    public PersonDTO addMovie(PersonDTO personToAdd) {
+    public PersonDTO addPerson(PersonDTO personToAdd) {
         Person person = personMapper.mapPersonDTOtoPerson(personToAdd);
         return personMapper.mapPersonToPersonDTO(personService.addPerson(person));
     }

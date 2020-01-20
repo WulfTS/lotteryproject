@@ -8,7 +8,7 @@ public interface PersonDelegate {
 
     List<PersonDTO> getAllPeople();
 
-    PersonDTO addMovie(PersonDTO personToAdd);
+    PersonDTO addPerson(PersonDTO personToAdd);
 
     void deletePersonById(Long id);
 
