@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/drawings/add">
+    <h1> Drawing Update Form</h1>
+    <table>
+        <tr>
+            <td>
+                <label>Name: </label>
+                <label>
+                    <input type="text" name="name" >
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Date (YYYY-MM-DD)</label>
+                <label>
+                    <input type="text" name="dateString">
+                </label>
+            </td></tr>
+        <tr>
+
+        <tr>
+            <td>
+                <label>Time (hh:mm)</label>
+                <label>
+                    <input type="text" name="timeString" >
+                </label>
+            </td></tr>
+
+        <tr>
+
+
+        <tr>
+            <td>
+                <label>Max Tickets</label>
+                <label>
+                    <input type="number" name="maxTickets" >
+                </label>
+            </td></tr>
+
+        <tr>
+
+
+
+            <td>
+                <button type="submit">Submit</button>
+                <button type = "reset">Reset</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+
+
+</body>
+</html>

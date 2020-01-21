@@ -22,6 +22,7 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     public Person addPerson(Person personToAdd) {
+        personToAdd.setIsActive(Boolean.TRUE);
         return personRepository.save(personToAdd);
     }
 
