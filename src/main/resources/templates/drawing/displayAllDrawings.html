@@ -6,6 +6,7 @@
 </head>
 <body>
 <table>
+    <h1>Drawings Summary</h1>
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -28,6 +29,17 @@
         <td>
             <a th:href="${'/drawings/' + {drawing.id}} + '/update'">Update</a>
         </td>
+    </tr>
+
+    <tr>
+        <td>
+            <a href="/" > home </a>
+        </td>
+
+        <td>
+            <a href="/people" > people </a>
+        </td>
+
     </tr>
 </table>
 

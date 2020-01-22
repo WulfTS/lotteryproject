@@ -8,6 +8,10 @@
 <h1>Drawing Data</h1>
 
 <table>
+    <td>
+        <a th:href="${'/drawings/' + {drawing.id}} + '/update'">Edit</a>
+    </td>
+
     <tr>
         <th>ID</th>
         <td>
@@ -36,6 +40,20 @@
     <td>
         <span th:text = "${drawing.maxTickets}"/>
     </td>
+    </tr>
+
+    <tr>
+        <td>
+            <a href="/" > home </a>
+        </td>
+
+        <td>
+            <a href="/people" > people </a>
+        </td>
+        <td>
+            <a href="/drawings" > drawings </a>
+        </td>
+
     </tr>
 
 

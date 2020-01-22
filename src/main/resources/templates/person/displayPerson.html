@@ -9,6 +9,11 @@
 
     <table>
         <tr>
+            <td>
+               <a th:href="${'/person/' + {person.id}} + '/update'">Edit</a>
+            </td>
+        </tr>
+        <tr>
             <th>ID</th>
             <td>
                 <span th:text = "${person.id}"></span>
@@ -36,6 +41,20 @@
             <td>
                 <span th:text = "${person.phoneNumber}"/>
             </td>
+        </tr>
+
+        <tr>
+            <td>
+                <a href="/" > home </a>
+            </td>
+
+            <td>
+                <a href="/people" > people </a>
+            </td>
+            <td>
+                <a href="/drawings" > drawings </a>
+            </td>
+
         </tr>
 
 
