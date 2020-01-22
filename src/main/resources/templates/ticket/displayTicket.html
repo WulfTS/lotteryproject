@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Ticket Data</h1>
+
+<table>
+    <td><a th:href="${'/tickets/' + {ticket.id}} + '/update'">Edit</a></td>
+
+    <tr>
+        <th>ID</th>
+        <td>
+            <span th:text = "${ticket.id}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th>Drawing ID</th>
+        <td>
+            <span th:text = "${ticket.drawingId}"></span>
+        </td>
+    </tr>
+    <tr>
+        <th>Person ID</th>
+        <td>
+            <span th:text = "${ticket.personId}"></span>
+        </td>
+    </tr>
+
+    <tr>
+    <tr>
+        <td><a href="/" > home </a></td>
+        <td><a href="/people" > people </a></td>
+        <td><a href="/drawings" > drawings </a></td>
+        <td><a href="/tickets" > tickets </a></td>
+    </tr>
+
+
+
+</table>
+
+</body>
+</html>
