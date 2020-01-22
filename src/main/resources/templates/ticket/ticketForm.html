@@ -12,19 +12,25 @@
         <tr>
             <td>
                 <label>Drawing Id: </label>
-                <label>
-                    <input type="number" name="drawingId" >
-                </label>
             </td>
-        </tr>
+            <td>
+                <select th:field = "*{drawingList}" name = "drawingId">
+                    <option value="">Select Drawing</option>
+                    <option th:each="drawing : ${drawingList}" th:value = "${drawing.getId()}" th:text = "${drawing.getName()}"></option>
+                </select>
+            </td>
 
          <tr>
             <td>
                 <label>Person Id</label>
-                <label>
-                    <input type="number" name="personId" >
-                </label>
-            </td></tr>
+            </td>
+        <td>
+            <select th:field = "*{peopleList}" name = "personId">
+                <option value="">Select Person</option>
+                <option th:each="person : ${peopleList}" th:value = "${person.getId()}" th:text = "${person.getFirstName()} + ' ' + ${person.getLastName()}"></option>
+            </select>
+        </td>
+    </tr>
 
         <tr>
 

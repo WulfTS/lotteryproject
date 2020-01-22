@@ -11,22 +11,28 @@
     <td><a th:href="${'/tickets/' + {ticket.id}} + '/update'">Edit</a></td>
 
     <tr>
-        <th>ID</th>
+        <label><td>Ticket ID</td></label>
+
         <td>
             <span th:text = "${ticket.id}"></span>
         </td>
     </tr>
-    <tr>
-        <th>Drawing ID</th>
+    <td>
+        <label><td>Drawing ID</td></label>
         <td>
             <span th:text = "${ticket.drawingId}"></span>
         </td>
+         <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingName}"></a></td>
     </tr>
     <tr>
-        <th>Person ID</th>
+        <label><td>Person ID</td></label>
         <td>
             <span th:text = "${ticket.personId}"></span>
         </td>
+        <td>
+        <td><a th:href="${'/person/' + {ticket.personId}}" th:text="${personName} ?: ''"></a></td>
+        </td>
+
     </tr>
 
     <tr>

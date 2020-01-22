@@ -26,7 +26,7 @@ public class LoadDatabase {
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 2",new SimpleDateFormat("yyyy-MM-dd").parse("2025-10-31"))));
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 3",new SimpleDateFormat("MM/dd/yyyy").parse("12/25/2025"),25)));
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 4",100)));
-            log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(1))));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(2))));
             log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(1), new Long(2))));
             log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(3), new Long(2))));
             log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(3), new Long(1))));

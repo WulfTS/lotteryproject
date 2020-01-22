@@ -16,6 +16,14 @@ public class PersonController {
 
     private final PersonDelegate personDelegate;
 
+    public PersonDTO getPersonById(Long id){
+        return personDelegate.findPersonById(id);
+    }
+
+    public List<PersonDTO> getAllPeople(){
+        return personDelegate.getAllPeople();
+    }
+
     // display main homepage
     @GetMapping(value = "/")
     public String homepage(Model model){

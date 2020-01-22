@@ -21,6 +21,14 @@ import java.util.List;
 public class DrawingController {
     private final DrawingDelegate drawingDelegate;
 
+    public DrawingDTO getDrawingById(Long id){
+        return drawingDelegate.findDrawingById(id);
+    }
+
+    public List<DrawingDTO> getAllDrawings(){
+        return drawingDelegate.getAllDrawings();
+    }
+
     // display drawing homepage
     @GetMapping(value = "/drawings")
     public String drawingHomepage(){
