@@ -6,18 +6,18 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Service
 public class DefaultDrawingMapper implements DrawingMapper {
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    Date newTime;
 
 
 
     @Override
     public Drawing mapDrawingDTOtoDrawing(DrawingDTO drawingDTO) throws ParseException {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 
         return Drawing.builder()
                 .id(drawingDTO.getId())
