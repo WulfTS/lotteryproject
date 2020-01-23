@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DrawingController {
+public class DefaultDrawingController {
     private final DrawingDelegate drawingDelegate;
 
     public DrawingDTO getDrawingById(Long id){

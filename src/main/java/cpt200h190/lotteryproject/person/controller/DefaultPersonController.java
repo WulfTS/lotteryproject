@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class PersonController {
+public class DefaultPersonController {
 
     private final PersonDelegate personDelegate;
 
