@@ -71,7 +71,21 @@ public class TicketController {
    public String addTicket(@ModelAttribute("ticket") TicketDTO ticketDTO, Model model){
         TicketDTO result = ticketDelegate.addTicket(ticketDTO);
         model.addAttribute("ticket",result);
-        return "/ticket/displayTicket";
+
+       String drawingName = drawingController.getDrawingById(ticketDTO.getDrawingId()).getName();
+
+       String personName;
+       if(ticketDTO.getPersonId() == null){
+           personName = "";
+       } else {
+           personName = personController.getPersonById(ticketDTO.getPersonId()).getFirstName() + " " +
+                   personController.getPersonById(ticketDTO.getPersonId()).getLastName();
+       }
+
+       model.addAttribute("drawingName",drawingName);
+       model.addAttribute("personName", personName);
+
+       return "/ticket/displayTicket";
     }
 
 }

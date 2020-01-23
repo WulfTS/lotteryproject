@@ -11,21 +11,21 @@
     <table>
         <tr>
             <td>
-                <label>Drawing Id: </label>
+                <label>Drawing: </label>
             </td>
             <td>
-                <select th:field = "*{drawingList}" name = "drawingId">
+                <select name = "drawingId" id = "drawingId">
                     <option value="">Select Drawing</option>
-                    <option th:each="drawing : ${drawingList}" th:value = "${drawing.getId()}" th:text = "${drawing.getName()}"></option>
+                    <option th:each="drawing : ${drawingList}" th:value = "${drawing.getId()}" th:text = "${drawing.getName()}" name = "ticket.drawingId"></option>
                 </select>
             </td>
 
          <tr>
             <td>
-                <label>Person Id</label>
+                <label>Person</label>
             </td>
         <td>
-            <select th:field = "*{peopleList}" name = "personId">
+            <select id = "personId" name = "personId">
                 <option value="">Select Person</option>
                 <option th:each="person : ${peopleList}" th:value = "${person.getId()}" th:text = "${person.getFirstName()} + ' ' + ${person.getLastName()}"></option>
             </select>
