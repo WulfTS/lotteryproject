@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
+<tr>
+    <td><a href="/" > home </a></td>
+    <td><a href="/people" > people </a></td>
+    <td><a href="/drawings" > drawings </a></td>
+    <td><a href="/drawings" > tickets </a></td>
+
+</tr>
+<div>
     <h1>Person Data</h1>
 
     <table>
@@ -40,15 +48,25 @@
                 <span th:text = "${person.phoneNumber}"/>
             </td>
         </tr>
+    </table>
+</div>
+<div>
+    <h4>Tickets</h4>
+    <table>
 
-        <tr>
-            <td><a href="/" > home </a></td>
-            <td><a href="/people" > people </a></td>
-            <td><a href="/drawings" > drawings </a></td>
+        <tr th:each="ticket: ${ticketList}">
+            <td><label>Ticket Number: </label></td>
+            <td th:text="${ticket.id}"/>
+            <td><label>Person ID: </label></td>
+            <td th:text="${ticket.personId}"/>
+            <td><label>Drawing ID:</label></td>
+            <td th:text="${ticket.drawingId}"/>
+
         </tr>
 
 
     </table>
+</div>
 
 </body>
 </html>

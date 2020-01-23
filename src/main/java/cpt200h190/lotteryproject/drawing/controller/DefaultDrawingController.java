@@ -2,6 +2,7 @@ package cpt200h190.lotteryproject.drawing.controller;
 
 import cpt200h190.lotteryproject.drawing.delegate.DrawingDelegate;
 import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
+import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,9 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DrawingController {
+public class DefaultDrawingController  {
     private final DrawingDelegate drawingDelegate;
-
+    private final TicketDelegate ticketDelegate;
     // display drawing homepage
     @GetMapping(value = "/drawings")
     public String drawingHomepage(){
@@ -61,6 +62,7 @@ public class DrawingController {
     public String displayDrawing(@PathVariable Long id, Model model){
         DrawingDTO drawing = drawingDelegate.findDrawingById(id);
         model.addAttribute("drawing", drawing);
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
         return "/drawing/displayDrawing";
     }
 

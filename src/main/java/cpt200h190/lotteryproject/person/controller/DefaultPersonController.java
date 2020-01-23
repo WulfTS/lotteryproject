@@ -2,6 +2,7 @@ package cpt200h190.lotteryproject.person.controller;
 
 import cpt200h190.lotteryproject.person.delegate.PersonDelegate;
 import cpt200h190.lotteryproject.person.dto.PersonDTO;
+import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,18 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class PersonController {
+public class DefaultPersonController {
 
     private final PersonDelegate personDelegate;
+    private final TicketDelegate ticketDelegate;
+
+    public PersonDTO getPersonById(Long id){
+        return personDelegate.findPersonById(id);
+    }
+
+    public List<PersonDTO> getAllPeople(){
+        return personDelegate.getAllPeople();
+    }
 
     // display main homepage
     @GetMapping(value = "/")
@@ -57,6 +67,7 @@ public class PersonController {
     public String displayPerson(@PathVariable Long id,  Model model){
         PersonDTO person = personDelegate.findPersonById(id);
         model.addAttribute("person", person);
+        model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(id));
         return "person/displayPerson";
     }
 
