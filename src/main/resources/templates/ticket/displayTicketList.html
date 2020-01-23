@@ -20,9 +20,9 @@
     <tr th:each="ticket: ${ticketList}">
         <td th:text="${ticket.id}"/>
         <td th:text="${ticket.drawingId}"/>
-        <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingController.getDrawingById(ticket.drawingId).getName()}"/></td>
+        <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingDelegate.findDrawingById(ticket.drawingId).getName()}"/></td>
         <td th:text="${ticket.personId}"/>
-        <td th:text="${ticket.personId != null} ? ${personController.getPersonById(ticket.personId).getFirstName()} + ' ' +${personController.getPersonById(ticket.personId).getLastName()} "/>
+        <td th:text="${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getFirstName()} + ' ' +${personDelegate.findPersonById(ticket.personId).getLastName()} "/>
         <td>
             <a th:href="${'/tickets/' + {ticket.id}}">View</a>
         </td>

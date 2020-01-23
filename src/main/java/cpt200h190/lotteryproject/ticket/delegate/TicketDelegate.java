@@ -13,4 +13,8 @@ public interface TicketDelegate {
     TicketDTO editTicket(TicketDTO ticketUpdates);
 
     TicketDTO findTicketById(Long id);
+
+    List<TicketDTO> findTicketsByDrawingId(Long drawingId);
+
+    List<TicketDTO> findTicketByPersonId(Long personId);
 }

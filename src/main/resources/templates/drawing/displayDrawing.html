@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Drawing Data</h1>
-
+<div>
 <table>
     <td><a th:href="${'/drawings/' + {drawing.id}} + '/update'">Edit</a></td>
 
@@ -41,15 +41,29 @@
     </tr>
 
     <tr>
-    <tr>
         <td><a href="/" > home </a></td>
         <td><a href="/people" > people </a></td>
         <td><a href="/drawings" > drawings </a></td>
     </tr>
+</table>
+</div>
+<div>
+    <h4>Tickets</h4>
+    <table>
+
+        <tr th:each="ticket: ${ticketList}">
+            <td><label>Ticket Number: </label></td>
+            <td th:text="${ticket.id}"/>
+            <td><label>Person ID: </label></td>
+            <td th:text="${ticket.personId}"/>
+            <td><label>Drawing ID:</label></td>
+            <td th:text="${ticket.drawingId}"/>
+
+        </tr>
 
 
 
 </table>
-
+</div>
 </body>
 </html>

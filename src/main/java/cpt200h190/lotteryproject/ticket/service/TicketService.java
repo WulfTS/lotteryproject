@@ -13,5 +13,8 @@ public interface TicketService {
 
     Ticket findTicketById(Long id);
 
+    List<Ticket> findTicketsByDrawingId(Long drawingId);
+
+    List<Ticket> findTicketByPersonId(Long personId);
 
 }

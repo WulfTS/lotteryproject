@@ -55,6 +55,16 @@
                 <button type = "reset">Reset</button>
             </td>
         </tr>
+
+        <tr th:each = "ticket : ${ticketList}">
+            <td><span>Ticket Id:</span></td>
+            <td th: text = "${ticket.id}"/>
+            <label text = "Drawing ID: "></label><td th: text = "${ticket.getDrawingId()}"/>
+            <td th: text = "${ticket.getPersonId()}"/>
+
+        </tr>
+
+
     </table>
 
 </form>

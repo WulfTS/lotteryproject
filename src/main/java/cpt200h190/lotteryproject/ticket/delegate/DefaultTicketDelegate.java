@@ -43,4 +43,20 @@ public class DefaultTicketDelegate implements TicketDelegate {
         Ticket ticket = ticketService.findTicketById(id);
         return ticketMapper.mapTicketToTicketDTO(ticket);
     }
+
+    @Override
+    public List<TicketDTO> findTicketsByDrawingId(Long drawingId) {
+        return ticketService.findTicketsByDrawingId(drawingId).stream()
+                .map(ticketMapper::mapTicketToTicketDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TicketDTO> findTicketByPersonId(Long personId) {
+        return ticketService.findTicketByPersonId(personId).stream()
+                .map(ticketMapper::mapTicketToTicketDTO)
+                .collect(Collectors.toList());
+    }
+
+
 }

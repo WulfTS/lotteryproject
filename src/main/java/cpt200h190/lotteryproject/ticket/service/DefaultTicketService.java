@@ -48,6 +48,17 @@ public class DefaultTicketService implements TicketService {
         return ticketRepository.findById(id).orElse(new Ticket());
     }
 
+    @Override
+    public List<Ticket> findTicketsByDrawingId(Long drawingId) {
+        return ticketRepository.findTicketByDrawingId(drawingId);
+    }
+
+    @Override
+    public List<Ticket> findTicketByPersonId(Long personId) {
+        return ticketRepository.findTicketByPersonId(personId);
+    }
+
+
     private Boolean idIsPresent(Long id){
         Optional<Ticket> one = ticketRepository.findById(id);
 

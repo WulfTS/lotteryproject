@@ -1,8 +1,8 @@
 package cpt200h190.lotteryproject.ticket.controller;
 
-import cpt200h190.lotteryproject.drawing.controller.DefaultDrawingController;
+import cpt200h190.lotteryproject.drawing.delegate.DrawingDelegate;
 import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
-import cpt200h190.lotteryproject.person.controller.DefaultPersonController;
+import cpt200h190.lotteryproject.person.delegate.PersonDelegate;
 import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
 import cpt200h190.lotteryproject.ticket.dto.TicketDTO;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class DefaultTicketController {
     private final TicketDelegate ticketDelegate;
-    private final DefaultDrawingController defaultDrawingController;
-    private final DefaultPersonController defaultPersonController;
+    private final DrawingDelegate drawingDelegate;
+    private final PersonDelegate personDelegate;
 
     // display ticket homepage
     @GetMapping(value = "/tickets")
@@ -34,8 +34,8 @@ public class DefaultTicketController {
     public String displayTickets(Model model){
         List<TicketDTO> ticketList = ticketDelegate.getAllTickets();
         model.addAttribute("ticketList", ticketList);
-        model.addAttribute("drawingController", defaultDrawingController);
-        model.addAttribute("personController", defaultPersonController);
+        model.addAttribute("drawingDelegate", drawingDelegate);
+        model.addAttribute("personDelegate", personDelegate);
         return "/ticket/displayTicketList";
     }
 
@@ -44,25 +44,31 @@ public class DefaultTicketController {
     public String displayTicket(@PathVariable Long id, Model model){
         String personName;
         TicketDTO ticket = ticketDelegate.findTicketById(id);
-        String drawingName = defaultDrawingController.getDrawingById(ticket.getDrawingId()).getName();
+        String drawingName = drawingDelegate.findDrawingById(ticket.getDrawingId()).getName();
+
+
+
         if(ticket.getPersonId() == null){
             personName = "";
         } else {
-            personName = defaultPersonController.getPersonById(ticket.getPersonId()).getFirstName() + " " +
-                    defaultPersonController.getPersonById(ticket.getPersonId()).getLastName();
+            personName = personDelegate.findPersonById(ticket.getPersonId()).getFirstName() + " " +
+                    personDelegate.findPersonById(ticket.getPersonId()).getLastName();
         }
         model.addAttribute("ticket",ticket);
         model.addAttribute("drawingName",drawingName);
         model.addAttribute("personName", personName);
+
+        model.addAttribute("ticketList",ticketDelegate.getAllTickets());
+
         return "/ticket/displayTicket";
     }
 
     // display new ticket form
     @GetMapping(value = "tickets/add")
     public String displayTicketForm(Model model){
-        List<DrawingDTO> drawingList = defaultDrawingController.getAllDrawings();
+        List<DrawingDTO> drawingList = drawingDelegate.getAllDrawings();
         model.addAttribute("drawingList",drawingList);
-        model.addAttribute("peopleList", defaultPersonController.getAllPeople());
+        model.addAttribute("peopleList", personDelegate.getAllPeople());
         return "/ticket/ticketForm";
     }
 
@@ -71,14 +77,14 @@ public class DefaultTicketController {
         TicketDTO result = ticketDelegate.addTicket(ticketDTO);
         model.addAttribute("ticket",result);
 
-       String drawingName = defaultDrawingController.getDrawingById(ticketDTO.getDrawingId()).getName();
+       String drawingName = drawingDelegate.findDrawingById(ticketDTO.getDrawingId()).getName();
 
        String personName;
        if(ticketDTO.getPersonId() == null){
            personName = "";
        } else {
-           personName = defaultPersonController.getPersonById(ticketDTO.getPersonId()).getFirstName() + " " +
-                   defaultPersonController.getPersonById(ticketDTO.getPersonId()).getLastName();
+           personName = personDelegate.findPersonById(ticketDTO.getPersonId()).getFirstName() + " " +
+                   personDelegate.findPersonById(ticketDTO.getPersonId()).getLastName();
        }
 
        model.addAttribute("drawingName",drawingName);
