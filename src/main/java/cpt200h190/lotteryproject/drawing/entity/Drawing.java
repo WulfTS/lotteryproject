@@ -34,6 +34,8 @@ public class Drawing {
 
     Integer maxTickets;
 
+    Long winningTicketId;
+
     // Constructors
    public Drawing(String name, Date time) {
         this.name = name;

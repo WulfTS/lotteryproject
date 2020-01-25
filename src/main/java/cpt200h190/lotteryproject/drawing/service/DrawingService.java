@@ -12,4 +12,6 @@ public interface DrawingService {
     Drawing editDrawing(Drawing drawingUpdates);
 
     Drawing findDrawingById(Long id);
+
+    Drawing drawWinner(Drawing drawing, Long ticketId);
 }

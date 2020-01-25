@@ -73,6 +73,7 @@ public class DefaultDrawingController  {
         return "/drawing/drawingUpdateForm";
     }
 
+
     // Actually update drawing
     @PostMapping(value = "/drawings")
     public String updateDrawingData(@ModelAttribute("drawingUpdate") DrawingDTO drawingDTO, Model model) throws ParseException {
@@ -95,4 +96,6 @@ public class DefaultDrawingController  {
         model.addAttribute("drawing", result);
         return "/drawing/displayDrawing";
     }
+
+    // perform drawings
 }

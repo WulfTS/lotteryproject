@@ -47,4 +47,13 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
         Drawing drawing = drawingService.findDrawingById(id);
         return drawingMapper.mapDrawingToDrawingDTO(drawing);
     }
+
+    @Override
+    public DrawingDTO drawWinner(DrawingDTO drawingDTO, Long ticketId) throws ParseException {
+
+        Drawing drawing = drawingService.findDrawingById(drawingDTO.getId());
+        return drawingMapper.mapDrawingToDrawingDTO(drawingService.drawWinner(drawing,ticketId));
+    }
+
+
 }

@@ -13,4 +13,6 @@ public interface DrawingDelegate {
     DrawingDTO editDrawing(DrawingDTO drawingUpdates) throws ParseException;
 
     DrawingDTO findDrawingById(Long id);
+
+    DrawingDTO drawWinner(DrawingDTO drawingDTO, Long ticketId) throws ParseException;
 }

@@ -54,6 +54,20 @@ public class DefaultDrawingService implements DrawingService {
         return drawingRepository.findById(id).orElse(new Drawing());
     }
 
+    @Override
+    public Drawing drawWinner(Drawing drawing, Long ticketId) {
+
+      if(drawing.getWinningTicketId() == null){
+          drawing.setWinningTicketId(ticketId);
+
+      } else {
+          // do nothing since a winner for this drawing has already been selected.
+      }
+
+        return drawingRepository.save(drawing);
+    }
+
+
     public Boolean idIsPresent(Long id) {
 
         Optional<Drawing> one = drawingRepository.findById(id);
@@ -63,5 +77,9 @@ public class DefaultDrawingService implements DrawingService {
         }
         return Boolean.FALSE;
     }
+
+
+
+
 }
 

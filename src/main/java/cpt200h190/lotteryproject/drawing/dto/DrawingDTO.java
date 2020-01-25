@@ -27,9 +27,12 @@ public class DrawingDTO {
     private Integer maxTickets;
 
     @JsonProperty
-    String dateString;
+    private String dateString;
 
     @JsonProperty
-    String timeString;
+    private String timeString;
+
+    @JsonProperty
+    private Long winningTicketId;
 
 }

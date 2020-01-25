@@ -31,6 +31,7 @@ public class LoadDatabase {
             log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(3), new Long(2))));
             log.info("Preloading: " + ticketRepository.save(new Ticket(new Long(3), new Long(1))));
 
+
         };
     }
 
