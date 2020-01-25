@@ -32,5 +32,4 @@ public class DrawingDTO {
     @JsonProperty
     String timeString;
 
-
 }
