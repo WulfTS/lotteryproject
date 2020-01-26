@@ -22,6 +22,7 @@ import java.util.List;
 public class DefaultDrawingController  {
     private final DrawingDelegate drawingDelegate;
     private final TicketDelegate ticketDelegate;
+
     // display drawing homepage
     @GetMapping(value = "/drawings")
     public String drawingHomepage(){
@@ -97,5 +98,12 @@ public class DefaultDrawingController  {
         return "/drawing/displayDrawing";
     }
 
-    // perform drawings
+    @GetMapping(value = "/drawing/{id}/drawWinner")
+    public String drawWinner(@PathVariable Long id, Model model){
+       DrawingDTO drawingDTO = drawingDelegate.drawWinner(id);
+       model.addAttribute("drawing", drawingDTO);
+       model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+       return "/drawing/displayDrawing";
+    }
+
 }

@@ -3,18 +3,22 @@ package cpt200h190.lotteryproject.drawing.service;
 import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import cpt200h190.lotteryproject.drawing.exceptions.DrawingNotFoundException;
 import cpt200h190.lotteryproject.drawing.repository.DrawingRepository;
+import cpt200h190.lotteryproject.ticket.entity.Ticket;
+import cpt200h190.lotteryproject.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class DefaultDrawingService implements DrawingService {
 
     private final DrawingRepository drawingRepository;
+    private final TicketService ticketService;
 
     @Override
     public List<Drawing> getAllDrawings() {
@@ -55,10 +59,21 @@ public class DefaultDrawingService implements DrawingService {
     }
 
     @Override
-    public Drawing drawWinner(Drawing drawing, Long ticketId) {
+    public Drawing drawWinner(Long id) {
+
+        Drawing drawing = findDrawingById(id);
+        List<Ticket> ticketList = ticketService.findTicketsByDrawingId(id);
+        Random random = new Random();
+
+        if(ticketList.size() == 0){
+            return findDrawingById(id);
+        }
+
+        Integer ticketListSize = ticketList.size();
+        Ticket winningTicket = ticketList.get(random.nextInt(ticketListSize));
 
       if(drawing.getWinningTicketId() == null){
-          drawing.setWinningTicketId(ticketId);
+          drawing.setWinningTicketId(winningTicket.getId());
 
       } else {
           // do nothing since a winner for this drawing has already been selected.

@@ -1,6 +1,8 @@
 package cpt200h190.lotteryproject.drawing.delegate;
 
 import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
+import cpt200h190.lotteryproject.ticket.dto.TicketDTO;
+import cpt200h190.lotteryproject.ticket.entity.Ticket;
 
 import java.text.ParseException;
 import java.util.List;
@@ -14,5 +16,5 @@ public interface DrawingDelegate {
 
     DrawingDTO findDrawingById(Long id);
 
-    DrawingDTO drawWinner(DrawingDTO drawingDTO, Long ticketId) throws ParseException;
+    DrawingDTO drawWinner(Long id);
 }

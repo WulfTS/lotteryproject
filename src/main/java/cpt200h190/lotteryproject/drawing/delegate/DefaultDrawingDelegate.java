@@ -4,12 +4,15 @@ import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
 import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import cpt200h190.lotteryproject.drawing.mapper.DrawingMapper;
 import cpt200h190.lotteryproject.drawing.service.DrawingService;
+import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
+import cpt200h190.lotteryproject.ticket.dto.TicketDTO;
+import cpt200h190.lotteryproject.ticket.entity.Ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,6 +21,7 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
 
     private final DrawingService drawingService;
     private final DrawingMapper drawingMapper;
+    private final TicketDelegate ticketDelegate;
 
     @Override
     public List<DrawingDTO> getAllDrawings() {
@@ -49,10 +53,9 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
     }
 
     @Override
-    public DrawingDTO drawWinner(DrawingDTO drawingDTO, Long ticketId) throws ParseException {
-
-        Drawing drawing = drawingService.findDrawingById(drawingDTO.getId());
-        return drawingMapper.mapDrawingToDrawingDTO(drawingService.drawWinner(drawing,ticketId));
+    public DrawingDTO drawWinner(Long id) {
+        Drawing drawing = drawingService.drawWinner(id);
+        return drawingMapper.mapDrawingToDrawingDTO(drawing);
     }
 
 
