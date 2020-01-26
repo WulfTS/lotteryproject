@@ -66,7 +66,7 @@ public class DefaultDrawingService implements DrawingService {
         Random random = new Random();
 
         if(ticketList.size() == 0){
-            return findDrawingById(id);
+            return new Drawing();
         }
 
         Integer ticketListSize = ticketList.size();

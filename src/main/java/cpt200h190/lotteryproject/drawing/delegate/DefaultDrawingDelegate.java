@@ -4,9 +4,6 @@ import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
 import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import cpt200h190.lotteryproject.drawing.mapper.DrawingMapper;
 import cpt200h190.lotteryproject.drawing.service.DrawingService;
-import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
-import cpt200h190.lotteryproject.ticket.dto.TicketDTO;
-import cpt200h190.lotteryproject.ticket.entity.Ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +18,6 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
 
     private final DrawingService drawingService;
     private final DrawingMapper drawingMapper;
-    private final TicketDelegate ticketDelegate;
 
     @Override
     public List<DrawingDTO> getAllDrawings() {

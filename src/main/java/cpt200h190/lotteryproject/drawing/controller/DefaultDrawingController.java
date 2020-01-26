@@ -2,6 +2,7 @@ package cpt200h190.lotteryproject.drawing.controller;
 
 import cpt200h190.lotteryproject.drawing.delegate.DrawingDelegate;
 import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
+import cpt200h190.lotteryproject.person.delegate.PersonDelegate;
 import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.List;
 public class DefaultDrawingController  {
     private final DrawingDelegate drawingDelegate;
     private final TicketDelegate ticketDelegate;
+    private final PersonDelegate personDelegate;
 
     // display drawing homepage
     @GetMapping(value = "/drawings")
@@ -102,7 +104,7 @@ public class DefaultDrawingController  {
     public String drawWinner(@PathVariable Long id, Model model){
        DrawingDTO drawingDTO = drawingDelegate.drawWinner(id);
        model.addAttribute("drawing", drawingDTO);
-       model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
        return "/drawing/displayDrawing";
     }
 

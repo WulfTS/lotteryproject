@@ -13,10 +13,12 @@
         <th>Date</th>
         <th>Time</th>
         <th>Max Tickets</th>
-        <th>Winning Ticket</th>
         <th>View</th>
         <th>Update</th>
-        <th>Draw Winner</th>
+        <th>Draw</th>
+        <th>Winning Ticket</th>
+        <th>Person</th>
+
     </tr>
 
     <tr th:each="drawing: ${drawingList}">
@@ -25,17 +27,19 @@
         <td th:text="${#dates.format(drawing.time, 'yyyy-MM-dd')}"/>
         <td th:text="${#dates.format(drawing.time, 'HH:mm')}"/>
         <td th:text="${drawing.maxTickets}"/>
-        <td th:text = "${drawing.winningTicketId}"/>
+
         <td>
             <a th:href="${'/drawings/' + {drawing.id}}">View</a>
         </td>
         <td>
             <a th:href="${'/drawings/' + {drawing.id}} + '/update'">Update</a>
         </td>
-        <td>
-            <a th:href="${'/drawing/' + {drawing.id}} + '/drawWinner'">Draw</a>
+        <td >
+            <a th:href="${'/drawing/' + {drawing.id}} + '/drawWinner'" th:text = "${drawing.winningTicketId != null} ? ' ': 'Draw'"></a>
+
         </td>
-    </tr>
+        <td th:text = "${drawing.winningTicketId}"/>
+
 
     <tr>
         <td>
