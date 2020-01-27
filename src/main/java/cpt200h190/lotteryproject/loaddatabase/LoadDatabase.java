@@ -23,10 +23,25 @@ public class LoadDatabase {
         return args -> {
             log.info("Preloading: " + personRepository.save(new Person("Test 1", "Person 1", "fleakrlprojects@gmail.com","555-555-5555")));
             log.info("Preloading: " + personRepository.save(new Person("Test 2", "Person 2", "fleakrlprojects@gmail.com","888-888-8888")));
+            log.info("Preloading: " + personRepository.save(new Person("Test 3", "Person 3", "fleakrlprojects@gmail.com","999-999-9999")));
+            log.info("Preloading: " + personRepository.save(new Person("Test 4", "Person 4", "fleakrlprojects@gmail.com","111-111-1111")));
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 1")));
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 2",new SimpleDateFormat("yyyy-MM-dd").parse("2025-10-31"))));
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 3",new SimpleDateFormat("MM/dd/yyyy").parse("12/25/2025"),25)));
             log.info("Preloading: " + drawingRepository.save(new Drawing("Drawing 4",100)));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(0).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(1).getId(),personRepository.findAll().get(0).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(2).getId(),personRepository.findAll().get(1).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(3).getId(),personRepository.findAll().get(1).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(0).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(1).getId(),personRepository.findAll().get(1).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(2).getId(),personRepository.findAll().get(0).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(3).getId(),personRepository.findAll().get(0).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(1).getId(),personRepository.findAll().get(2).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(2).getId(),personRepository.findAll().get(2).getId())));
+            log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(3).getId(),personRepository.findAll().get(3).getId())));
+
+
 
 
         };
