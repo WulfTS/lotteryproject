@@ -39,6 +39,9 @@
 
         </td>
         <td th:text = "${drawing.winningTicketId}"/>
+        <td>
+            <span th:if="${drawing.winningTicketId != null}"><a th:href="${'/person/' + {ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}}" th:text ="${ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}" ></a></span>
+        </td>
 
 
     <tr>

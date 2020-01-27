@@ -36,6 +36,8 @@ public class DefaultDrawingController  {
     public String displayDrawings(Model model){
         List<DrawingDTO> drawingList = drawingDelegate.getAllDrawings();
         model.addAttribute("drawingList",drawingList);
+        model.addAttribute("ticketDelegate",ticketDelegate);
+        model.addAttribute("personDelegate",personDelegate);
         return "/drawing/displayAllDrawings";
     }
 
