@@ -64,10 +64,8 @@ public class DefaultDrawingService implements DrawingService {
 
     @Override
     public Drawing findDrawingById(UUID id) {
-        if(drawingRepository.findById(id) == null){
-            return new Drawing();
-        }
-        return drawingRepository.findById(id);
+
+        return drawingRepository.findById(id).orElse(new Drawing());
     }
 
     @Override
@@ -115,7 +113,7 @@ public class DefaultDrawingService implements DrawingService {
 
     private Boolean idIsPresent(UUID id) {
 
-        Optional<Drawing> one = Optional.ofNullable(drawingRepository.findById(id));
+        Optional<Drawing> one = drawingRepository.findById(id);
 
         if(one.isPresent()){
             return Boolean.TRUE;

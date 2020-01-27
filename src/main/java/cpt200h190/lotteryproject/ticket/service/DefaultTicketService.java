@@ -46,10 +46,7 @@ public class DefaultTicketService implements TicketService {
 
     @Override
     public Ticket findTicketById(UUID id) {
-        if(ticketRepository.findById(id) == null){
-            return new Ticket();
-        }
-        return ticketRepository.findById(id);
+       return ticketRepository.findById(id).orElse(new Ticket());
     }
 
     @Override
@@ -64,7 +61,7 @@ public class DefaultTicketService implements TicketService {
 
 
     private Boolean idIsPresent(UUID id){
-        Optional<Ticket> one = Optional.ofNullable(ticketRepository.findById(id));
+        Optional<Ticket> one = ticketRepository.findById(id);
 
         if(one.isPresent()){
             return Boolean.TRUE;

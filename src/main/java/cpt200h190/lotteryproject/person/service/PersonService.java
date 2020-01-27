@@ -8,12 +8,18 @@ import java.util.UUID;
 public interface PersonService {
     List<Person> getAllPeople();
 
+    List<Person> getActivePeopleList();
+
+    List<Person> getInactivePeopleList();
+
     Person addPerson(Person personToAdd);
 
     Person editPerson(Person personToEdit);
 
-    void deletePersonById(UUID id);
+    void changeActiveStatusById(UUID id);
 
     Person findPersonById(UUID id);
+
+
 
 }

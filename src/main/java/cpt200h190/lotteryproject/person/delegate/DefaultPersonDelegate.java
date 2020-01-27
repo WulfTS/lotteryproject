@@ -19,11 +19,23 @@ public class DefaultPersonDelegate implements PersonDelegate {
     private final PersonService personService;
     private final PersonMapper personMapper;
 
-
-
     @Override
     public List<PersonDTO> getAllPeople() {
         return personService.getAllPeople().stream()
+                .map(personMapper::mapPersonToPersonDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PersonDTO> getActivePeopleList() {
+        return personService.getActivePeopleList().stream()
+                .map(personMapper::mapPersonToPersonDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PersonDTO> getInactivePeopleList() {
+        return personService.getInactivePeopleList().stream()
                 .map(personMapper::mapPersonToPersonDTO)
                 .collect(Collectors.toList());
     }
@@ -42,8 +54,8 @@ public class DefaultPersonDelegate implements PersonDelegate {
     }
 
     @Override
-    public void deletePersonById(UUID id) {
-        personService.deletePersonById(id);
+    public void changeActiveStatusById(UUID id) {
+        personService.changeActiveStatusById(id);
     }
 
     @Override

@@ -67,9 +67,9 @@ public class DefaultTicketController {
     // display new ticket form
     @GetMapping(value = "tickets/add")
     public String displayTicketForm(Model model){
-        List<DrawingDTO> drawingList = drawingDelegate.getAllDrawings();
+        List<DrawingDTO> drawingList = drawingDelegate.findActiveDrawings();
         model.addAttribute("drawingList",drawingList);
-        model.addAttribute("peopleList", personDelegate.getAllPeople());
+        model.addAttribute("peopleList", personDelegate.getActivePeopleList());
         return "/ticket/ticketForm";
     }
 

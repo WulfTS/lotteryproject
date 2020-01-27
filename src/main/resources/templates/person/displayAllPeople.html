@@ -16,10 +16,11 @@
             <th>Active?</th>
             <th>View</th>
             <th>Update</th>
+            <th>Change Status</th>
         </tr>
 
         <tr th:each="person: ${peopleList}">
-            <td th:text="${person.id}"/>
+            <td th:text="${person.humanReadableId}"/>
             <td th:text="${person.firstName}"/>
             <td th:text="${person.lastName}"/>
             <td th:text="${person.email}"/>
@@ -30,6 +31,9 @@
             </td>
             <td>
                 <a th:href="${'/person/' + {person.id}} + '/update'">Update</a>
+            </td>
+            <td>
+                <a th:href="${'/person/' + {person.id}} + '/changeStatus'" th:text=" ${{person.isActive == true} ? 'Deactivate' : 'Activate'}"></a>
             </td>
         </tr>
 

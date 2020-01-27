@@ -15,6 +15,7 @@ public class DefaultPersonMapper implements PersonMapper {
                 .email(personDTO.getEmail())
                 .phoneNumber(personDTO.getPhoneNumber())
                 .isActive(personDTO.getIsActive())
+                .humanReadableId(personDTO.getHumanReadableId())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class DefaultPersonMapper implements PersonMapper {
                 .email(person.getEmail())
                 .phoneNumber(person.getPhoneNumber())
                 .isActive(person.getIsActive())
+                .humanReadableId(person.getHumanReadableId())
                 .build();
     }
 

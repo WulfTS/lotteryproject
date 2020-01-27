@@ -56,12 +56,26 @@ public class DefaultPersonController {
     }
 
     // list all people in database
-    @GetMapping(value="/person")
+    @GetMapping(value="/people/all")
     public String displayPeople(Model model){
         List<PersonDTO> peopleList = personDelegate.getAllPeople();
         model.addAttribute("peopleList",peopleList);
         return "person/displayAllPeople";
     }
+    @GetMapping(value="/people/active")
+    public String displayActivePeople(Model model){
+        List<PersonDTO> peopleList = personDelegate.getActivePeopleList();
+        model.addAttribute("peopleList",peopleList);
+        return "person/displayAllPeople";
+    }
+
+    @GetMapping(value="/people/inactive")
+    public String displayInactivePeople(Model model){
+        List<PersonDTO> peopleList = personDelegate.getInactivePeopleList();
+        model.addAttribute("peopleList",peopleList);
+        return "person/displayAllPeople";
+    }
+
 
     // Display person by id
     @GetMapping(value="/person/{id}")
@@ -85,6 +99,15 @@ public class DefaultPersonController {
         PersonDTO result = personDelegate.editPerson(personDTO);
         model.addAttribute("person",result);
         return "person/displayPerson";
+    }
+
+    @GetMapping(value = "person/{id}/changeStatus")
+    public String changePersonActiveStatus(@PathVariable UUID id, Model model){
+        personDelegate.changeActiveStatusById(id);
+        PersonDTO result = personDelegate.findPersonById(id);
+        model.addAttribute("person",result);
+        return "person/displayPerson";
+
     }
 
 

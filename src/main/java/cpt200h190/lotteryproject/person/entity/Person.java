@@ -15,6 +15,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(name = "seq",initialValue = 1)
 public class Person {
 
 
@@ -23,6 +24,8 @@ public class Person {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
+
+    private String humanReadableId;
 
     @Column
     @NotNull

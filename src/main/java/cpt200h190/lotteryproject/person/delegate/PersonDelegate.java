@@ -9,11 +9,15 @@ public interface PersonDelegate {
 
     List<PersonDTO> getAllPeople();
 
+    List<PersonDTO> getActivePeopleList();
+
+    List<PersonDTO> getInactivePeopleList();
+
     PersonDTO addPerson(PersonDTO personToAdd);
 
     PersonDTO editPerson(PersonDTO personUpdates);
 
-    void deletePersonById(UUID id);
+    void changeActiveStatusById(UUID id);
 
     PersonDTO findPersonById(UUID id);
 

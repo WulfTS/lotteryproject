@@ -13,13 +13,21 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DefaultPersonService implements PersonService {
+class DefaultPersonService implements PersonService {
     private final PersonRepository personRepository;
 
     @Override
     public List<Person> getAllPeople() {
         return personRepository.findAll();
     }
+
+    @Override
+    public List<Person> getActivePeopleList() {
+        return personRepository.findPersonByIsActive(Boolean.TRUE);
+    }
+
+    @Override
+    public List<Person> getInactivePeopleList() { return personRepository.findPersonByIsActive(Boolean.FALSE); }
 
     @Override
     public Person addPerson(Person personToAdd) {
@@ -36,7 +44,7 @@ public class DefaultPersonService implements PersonService {
 
         Person existingPerson = findPersonById(personUpdates.getId());
 
-        // If person update fields are blank keep existing data
+        // If person update fields are null keep existing data
         if (personUpdates.getFirstName() == null || personUpdates.getFirstName().equals("")){
             personUpdates.setFirstName(existingPerson.getFirstName());
         }
@@ -44,7 +52,6 @@ public class DefaultPersonService implements PersonService {
         if (personUpdates.getLastName() == null || personUpdates.getLastName().equals("")) {
             personUpdates.setLastName(existingPerson.getLastName());
         }
-
 
         if (personUpdates.getEmail() == null || personUpdates.getEmail().equals("")) {
             personUpdates.setEmail(existingPerson.getEmail());
@@ -58,27 +65,20 @@ public class DefaultPersonService implements PersonService {
         }
 
         return personRepository.save(personUpdates);
-
-
     }
 
     @Override
-    public void deletePersonById(UUID id) {
-        personRepository.deleteById(id);
-
+    public void changeActiveStatusById(UUID id) {
+        Person person = findPersonById(id);
+        person.setIsActive(!person.getIsActive());
+        personRepository.save(person);
     }
 
     @Override
-    public Person findPersonById(UUID id) {
-        if(personRepository.findById(id)== null){
-            return new Person();
-        }
-        return personRepository.findById(id);
-    }
+    public Person findPersonById(UUID id) { return personRepository.findById(id).orElse(new Person()); }
 
     private Boolean idIsPresent(UUID id) {
-        Optional<Person> one = Optional.ofNullable(personRepository.findById(id));
-
+        Optional<Person> one = personRepository.findById(id);
         if(one.isPresent()){
             return Boolean.TRUE;
         }
