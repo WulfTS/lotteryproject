@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
@@ -34,6 +35,8 @@ public class DefaultDrawingService implements DrawingService {
     @Override
     public Drawing editDrawing(Drawing drawingUpdates) {
         if (idIsPresent(drawingUpdates.getId()).equals(Boolean.FALSE)) {
+
+
             throw new DrawingNotFoundException(drawingUpdates.getId());
         }
 
@@ -60,12 +63,15 @@ public class DefaultDrawingService implements DrawingService {
     }
 
     @Override
-    public Drawing findDrawingById(Long id) {
-        return drawingRepository.findById(id).orElse(new Drawing());
+    public Drawing findDrawingById(UUID id) {
+        if(drawingRepository.findById(id) == null){
+            return new Drawing();
+        }
+        return drawingRepository.findById(id);
     }
 
     @Override
-    public Drawing drawWinner(Long id) {
+    public Drawing drawWinner(UUID id) {
 
         Drawing drawing = findDrawingById(id);
         List<Ticket> ticketList = ticketService.findTicketsByDrawingId(id);
@@ -100,16 +106,16 @@ public class DefaultDrawingService implements DrawingService {
     }
 
     @Override
-    public void cancelDrawing(Long id) {
+    public void cancelDrawing(UUID id) {
         Drawing drawing = findDrawingById(id);
         drawing.setIsActive(Boolean.FALSE);
         drawingRepository.save(drawing);
     }
 
 
-    public Boolean idIsPresent(Long id) {
+    private Boolean idIsPresent(UUID id) {
 
-        Optional<Drawing> one = drawingRepository.findById(id);
+        Optional<Drawing> one = Optional.ofNullable(drawingRepository.findById(id));
 
         if(one.isPresent()){
             return Boolean.TRUE;

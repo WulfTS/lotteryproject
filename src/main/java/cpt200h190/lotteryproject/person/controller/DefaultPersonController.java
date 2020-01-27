@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
@@ -18,7 +19,7 @@ public class DefaultPersonController {
     private final PersonDelegate personDelegate;
     private final TicketDelegate ticketDelegate;
 
-    public PersonDTO getPersonById(Long id){
+    public PersonDTO getPersonById(UUID id){
         return personDelegate.findPersonById(id);
     }
 
@@ -64,7 +65,7 @@ public class DefaultPersonController {
 
     // Display person by id
     @GetMapping(value="/person/{id}")
-    public String displayPerson(@PathVariable Long id,  Model model){
+    public String displayPerson(@PathVariable UUID id, Model model){
         PersonDTO person = personDelegate.findPersonById(id);
         model.addAttribute("person", person);
         model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(id));
@@ -73,7 +74,7 @@ public class DefaultPersonController {
 
     //Display update form
     @GetMapping(value="/person/{id}/update")
-    public String displayUpdateForm(@PathVariable Long id,  Model model){
+    public String displayUpdateForm(@PathVariable UUID id,  Model model){
         model.addAttribute("existingPerson", personDelegate.findPersonById(id));
         return "person/personUpdateForm";
     }

@@ -3,6 +3,7 @@ package cpt200h190.lotteryproject.person.delegate;
 import cpt200h190.lotteryproject.person.dto.PersonDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PersonDelegate {
 
@@ -12,8 +13,8 @@ public interface PersonDelegate {
 
     PersonDTO editPerson(PersonDTO personUpdates);
 
-    void deletePersonById(Long id);
+    void deletePersonById(UUID id);
 
-    PersonDTO findPersonById(Long id);
+    PersonDTO findPersonById(UUID id);
 
 }

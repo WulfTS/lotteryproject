@@ -3,6 +3,7 @@ package cpt200h190.lotteryproject.ticket.service;
 import cpt200h190.lotteryproject.ticket.entity.Ticket;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface TicketService {
     List<Ticket> getAllTickets();
@@ -11,10 +12,10 @@ public interface TicketService {
 
     Ticket editTicket(Ticket ticketUpdates);
 
-    Ticket findTicketById(Long id);
+    Ticket findTicketById(UUID id);
 
-    List<Ticket> findTicketsByDrawingId(Long drawingId);
+    List<Ticket> findTicketsByDrawingId(UUID drawingId);
 
-    List<Ticket> findTicketByPersonId(Long personId);
+    List<Ticket> findTicketByPersonId(UUID personId);
 
 }

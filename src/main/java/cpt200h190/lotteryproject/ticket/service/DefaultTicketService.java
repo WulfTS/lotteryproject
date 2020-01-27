@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
@@ -44,23 +45,26 @@ public class DefaultTicketService implements TicketService {
     }
 
     @Override
-    public Ticket findTicketById(Long id) {
-        return ticketRepository.findById(id).orElse(new Ticket());
+    public Ticket findTicketById(UUID id) {
+        if(ticketRepository.findById(id) == null){
+            return new Ticket();
+        }
+        return ticketRepository.findById(id);
     }
 
     @Override
-    public List<Ticket> findTicketsByDrawingId(Long drawingId) {
+    public List<Ticket> findTicketsByDrawingId(UUID drawingId) {
         return ticketRepository.findTicketByDrawingId(drawingId);
     }
 
     @Override
-    public List<Ticket> findTicketByPersonId(Long personId) {
+    public List<Ticket> findTicketByPersonId(UUID personId) {
         return ticketRepository.findTicketByPersonId(personId);
     }
 
 
-    private Boolean idIsPresent(Long id){
-        Optional<Ticket> one = ticketRepository.findById(id);
+    private Boolean idIsPresent(UUID id){
+        Optional<Ticket> one = Optional.ofNullable(ticketRepository.findById(id));
 
         if(one.isPresent()){
             return Boolean.TRUE;

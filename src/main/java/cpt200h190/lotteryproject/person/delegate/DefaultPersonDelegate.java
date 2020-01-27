@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -41,12 +42,12 @@ public class DefaultPersonDelegate implements PersonDelegate {
     }
 
     @Override
-    public void deletePersonById(Long id) {
+    public void deletePersonById(UUID id) {
         personService.deletePersonById(id);
     }
 
     @Override
-    public PersonDTO findPersonById(Long id) {
+    public PersonDTO findPersonById(UUID id) {
         Person person = personService.findPersonById(id);
         return personMapper.mapPersonToPersonDTO(person);
     }

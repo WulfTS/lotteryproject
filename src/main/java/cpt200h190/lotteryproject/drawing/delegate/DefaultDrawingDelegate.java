@@ -69,13 +69,13 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
     }
 
     @Override
-    public DrawingDTO findDrawingById(Long id) {
+    public DrawingDTO findDrawingById(UUID id) {
         Drawing drawing = drawingService.findDrawingById(id);
         return drawingMapper.mapDrawingToDrawingDTO(drawing);
     }
 
     @Override
-    public DrawingDTO drawWinner(Long id) {
+    public DrawingDTO drawWinner(UUID id) {
         Drawing drawing = drawingService.drawWinner(id);
         return drawingMapper.mapDrawingToDrawingDTO(drawing);
     }
@@ -95,7 +95,7 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
     }
 
     @Override
-    public void cancelDrawing(Long id) {
+    public void cancelDrawing(UUID id) {
         drawingService.cancelDrawing(id);
     }
 

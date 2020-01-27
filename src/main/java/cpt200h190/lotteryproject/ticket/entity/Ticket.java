@@ -6,9 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -18,19 +19,20 @@ import javax.validation.constraints.NotNull;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
-    @NotNull
-    Long drawingId;
+    UUID drawingId;
 
-    Long personId;
+    UUID personId;
 
-    public Ticket(Long drawingId){
+    public Ticket(UUID drawingId){
         this.drawingId = drawingId;
     }
 
-    public Ticket(Long drawingId, Long personId){
+    public Ticket(UUID drawingId, UUID personId){
         this.drawingId = drawingId;
         this.personId = personId;
     }

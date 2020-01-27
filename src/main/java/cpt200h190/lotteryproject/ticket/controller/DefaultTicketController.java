@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
@@ -41,7 +42,7 @@ public class DefaultTicketController {
 
     // display individual ticket
     @GetMapping(value = "tickets/{id}")
-    public String displayTicket(@PathVariable Long id, Model model){
+    public String displayTicket(@PathVariable UUID id, Model model){
         String personName;
         TicketDTO ticket = ticketDelegate.findTicketById(id);
         String drawingName = drawingDelegate.findDrawingById(ticket.getDrawingId()).getName();

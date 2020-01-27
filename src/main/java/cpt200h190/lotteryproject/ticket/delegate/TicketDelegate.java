@@ -3,6 +3,7 @@ package cpt200h190.lotteryproject.ticket.delegate;
 import cpt200h190.lotteryproject.ticket.dto.TicketDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface TicketDelegate {
 
@@ -12,9 +13,9 @@ public interface TicketDelegate {
 
     TicketDTO editTicket(TicketDTO ticketUpdates);
 
-    TicketDTO findTicketById(Long id);
+    TicketDTO findTicketById(UUID id);
 
-    List<TicketDTO> findTicketsByDrawingId(Long drawingId);
+    List<TicketDTO> findTicketsByDrawingId(UUID drawingId);
 
-    List<TicketDTO> findTicketByPersonId(Long personId);
+    List<TicketDTO> findTicketByPersonId(UUID personId);
 }

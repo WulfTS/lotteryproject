@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
@@ -84,7 +85,7 @@ public class DefaultDrawingController  {
 
     //display individual drawing
     @GetMapping(value = "drawings/{id}")
-    public String displayDrawing(@PathVariable Long id, Model model){
+    public String displayDrawing(@PathVariable UUID id, Model model){
         DrawingDTO drawing = drawingDelegate.findDrawingById(id);
         model.addAttribute("drawing", drawing);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
@@ -93,7 +94,7 @@ public class DefaultDrawingController  {
 
     // display edit drawing form
     @GetMapping(value = "drawings/{id}/update")
-    public String editDrawing(@PathVariable Long id, Model model){
+    public String editDrawing(@PathVariable UUID id, Model model){
         model.addAttribute("existingDrawing", drawingDelegate.findDrawingById(id));
         return "/drawing/drawingUpdateForm";
     }
@@ -123,7 +124,7 @@ public class DefaultDrawingController  {
     }
 
     @GetMapping(value = "/drawing/{id}/drawWinner")
-    public String drawWinner(@PathVariable Long id, Model model){
+    public String drawWinner(@PathVariable UUID id, Model model){
        DrawingDTO drawingDTO = drawingDelegate.drawWinner(id);
        model.addAttribute("drawing", drawingDTO);
        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
@@ -145,7 +146,7 @@ public class DefaultDrawingController  {
     }
 
     @GetMapping(value = "/drawing/{id}/cancel")
-    public String cancelDrawing(@PathVariable Long id, Model model){
+    public String cancelDrawing(@PathVariable UUID id, Model model){
         drawingDelegate.cancelDrawing(id);
         DrawingDTO results = drawingDelegate.findDrawingById(id);
         model.addAttribute("drawing", results);

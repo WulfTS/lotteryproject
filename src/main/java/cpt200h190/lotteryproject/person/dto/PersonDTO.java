@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 
 @Data
 @Builder
@@ -12,7 +14,7 @@ import lombok.Data;
 public class PersonDTO {
 
     @JsonProperty
-    private Long id;
+    private UUID id;
 
     @JsonProperty
     private String firstName;

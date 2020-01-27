@@ -5,17 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @AllArgsConstructor
 public class TicketDTO {
 
     @JsonProperty
-    private Long id;
+    private UUID id;
 
     @JsonProperty
-    private Long drawingId;
+    private UUID drawingId;
 
     @JsonProperty
-    private Long personId;
+    private UUID personId;
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -16,7 +17,7 @@ public class DrawingDTO {
     public static Boolean defaultIsActive = Boolean.TRUE;
 
     @JsonProperty
-    private Long id;
+    private UUID id;
 
     @JsonProperty
     private String name;
@@ -34,7 +35,7 @@ public class DrawingDTO {
     private String timeString;
 
     @JsonProperty
-    private Long winningTicketId;
+    private UUID winningTicketId;
 
     @JsonProperty
     private Boolean isActive;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -39,20 +40,20 @@ public class DefaultTicketDelegate implements TicketDelegate {
     }
 
     @Override
-    public TicketDTO findTicketById(Long id) {
+    public TicketDTO findTicketById(UUID id) {
         Ticket ticket = ticketService.findTicketById(id);
         return ticketMapper.mapTicketToTicketDTO(ticket);
     }
 
     @Override
-    public List<TicketDTO> findTicketsByDrawingId(Long drawingId) {
+    public List<TicketDTO> findTicketsByDrawingId(UUID drawingId) {
         return ticketService.findTicketsByDrawingId(drawingId).stream()
                 .map(ticketMapper::mapTicketToTicketDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<TicketDTO> findTicketByPersonId(Long personId) {
+    public List<TicketDTO> findTicketByPersonId(UUID personId) {
         return ticketService.findTicketByPersonId(personId).stream()
                 .map(ticketMapper::mapTicketToTicketDTO)
                 .collect(Collectors.toList());

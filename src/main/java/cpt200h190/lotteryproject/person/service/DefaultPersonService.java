@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
@@ -62,19 +63,21 @@ public class DefaultPersonService implements PersonService {
     }
 
     @Override
-    public void deletePersonById(Long id) {
+    public void deletePersonById(UUID id) {
         personRepository.deleteById(id);
 
     }
 
     @Override
-    public Person findPersonById(Long id) {
-        return personRepository.findById(id).orElse(new Person());
+    public Person findPersonById(UUID id) {
+        if(personRepository.findById(id)== null){
+            return new Person();
+        }
+        return personRepository.findById(id);
     }
 
-    @Override
-    public Boolean idIsPresent(Long id) {
-        Optional<Person> one = personRepository.findById(id);
+    private Boolean idIsPresent(UUID id) {
+        Optional<Person> one = Optional.ofNullable(personRepository.findById(id));
 
         if(one.isPresent()){
             return Boolean.TRUE;
