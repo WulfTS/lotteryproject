@@ -25,6 +25,7 @@ public class DefaultDrawingMapper implements DrawingMapper {
                 .time(format.parse(drawingDTO.getDateString() + " " + drawingDTO.getTimeString()) )
                 .maxTickets(drawingDTO.getMaxTickets())
                 .winningTicketId(drawingDTO.getWinningTicketId())
+                .isActive(drawingDTO.getIsActive())
                 .build();
     }
 
@@ -36,6 +37,7 @@ public class DefaultDrawingMapper implements DrawingMapper {
                 .time(drawing.getTime())
                 .maxTickets(drawing.getMaxTickets())
                 .winningTicketId(drawing.getWinningTicketId())
+                .isActive(drawing.getIsActive())
                 .build();
     }
 }

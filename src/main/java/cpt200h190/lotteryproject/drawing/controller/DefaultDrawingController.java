@@ -41,6 +41,26 @@ public class DefaultDrawingController  {
         return "/drawing/displayAllDrawings";
     }
 
+    @GetMapping(value = "drawings/active")
+    public String displayActiveDrawings(Model model){
+        List<DrawingDTO> drawingList = drawingDelegate.findActiveDrawings();
+        model.addAttribute("drawingList",drawingList);
+        model.addAttribute("ticketDelegate",ticketDelegate);
+        model.addAttribute("personDelegate",personDelegate);
+        return "/drawing/displayAllDrawings";
+    }
+
+    @GetMapping(value = "drawings/inactive")
+    public String displayInactiveDrawings(Model model){
+        List<DrawingDTO> drawingList = drawingDelegate.findInactiveDrawings();
+        model.addAttribute("drawingList",drawingList);
+        model.addAttribute("ticketDelegate",ticketDelegate);
+        model.addAttribute("personDelegate",personDelegate);
+        return "/drawing/displayAllDrawings";
+    }
+
+
+
     // display new drawing form
     @GetMapping(value = "drawings/add")
     public String addDrawing(){
@@ -106,8 +126,31 @@ public class DefaultDrawingController  {
     public String drawWinner(@PathVariable Long id, Model model){
        DrawingDTO drawingDTO = drawingDelegate.drawWinner(id);
        model.addAttribute("drawing", drawingDTO);
-        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+       model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
        return "/drawing/displayDrawing";
+    }
+
+    @GetMapping(value = "/drawings/drawWinner")
+    public String displayDrawWinnerForm(Model model){
+        model.addAttribute("drawingList",drawingDelegate.findActiveDrawings());
+        return  "/drawing/drawWinner";
+    }
+
+    @PostMapping(value = "/drawings/drawWinner")
+    public String displayWinner(@ModelAttribute DrawingDTO drawingDTO, Model model){
+        DrawingDTO result = drawingDelegate.drawWinner(drawingDTO.getId());
+        model.addAttribute("drawing",result);
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(drawingDTO.getId()));
+        return  "/drawing/displayDrawing";
+    }
+
+    @GetMapping(value = "/drawing/{id}/cancel")
+    public String cancelDrawing(@PathVariable Long id, Model model){
+        drawingDelegate.cancelDrawing(id);
+        DrawingDTO results = drawingDelegate.findDrawingById(id);
+        model.addAttribute("drawing", results);
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+        return "/drawing/displayDrawing";
     }
 
 }

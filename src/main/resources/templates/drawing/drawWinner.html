@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/drawings/drawWinner">
+    <h1> Draw Winner Form</h1>
+    <table>
+        <tr>
+            <td>
+                <label>Drawing: </label>
+            </td>
+            <td>
+                <select name = "id" id = "id">
+                    <option value="">Select Drawing</option>
+                    <option th:each="drawing : ${drawingList}" th:value = "${drawing.getId()}" th:text = "${drawing.getName()}" name = "drawing.id"></option>
+                </select>
+            </td>
+
+
+        <tr>
+
+
+
+            <td>
+                <button type="submit">Submit</button>
+                <button type = "reset">Reset</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+
+
+</body>
+</html>

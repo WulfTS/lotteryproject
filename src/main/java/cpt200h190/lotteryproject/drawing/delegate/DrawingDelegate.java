@@ -1,6 +1,7 @@
 package cpt200h190.lotteryproject.drawing.delegate;
 
 import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
+import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import cpt200h190.lotteryproject.ticket.dto.TicketDTO;
 import cpt200h190.lotteryproject.ticket.entity.Ticket;
 
@@ -17,4 +18,9 @@ public interface DrawingDelegate {
     DrawingDTO findDrawingById(Long id);
 
     DrawingDTO drawWinner(Long id);
+
+    List<DrawingDTO> findActiveDrawings();
+    List<DrawingDTO> findInactiveDrawings();
+
+    void cancelDrawing(Long id);
 }

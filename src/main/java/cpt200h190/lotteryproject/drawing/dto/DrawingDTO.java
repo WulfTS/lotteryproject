@@ -13,6 +13,7 @@ import java.util.Date;
 public class DrawingDTO {
     public static String defaultDateString = "9999-12-31";
     public static String defaultTimeString = "00:00";
+    public static Boolean defaultIsActive = Boolean.TRUE;
 
     @JsonProperty
     private Long id;
@@ -34,5 +35,8 @@ public class DrawingDTO {
 
     @JsonProperty
     private Long winningTicketId;
+
+    @JsonProperty
+    private Boolean isActive;
 
 }

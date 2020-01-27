@@ -27,6 +27,7 @@ public class DefaultDrawingService implements DrawingService {
 
     @Override
     public Drawing addDrawing(Drawing drawingToAdd) {
+        drawingToAdd.setIsActive(Boolean.TRUE);
         return drawingRepository.save(drawingToAdd);
     }
 
@@ -50,6 +51,11 @@ public class DefaultDrawingService implements DrawingService {
         if(drawingUpdates.getMaxTickets() == null){
             drawingUpdates.setMaxTickets(existingDrawing.getMaxTickets());
         }
+        if(drawingUpdates.getIsActive() == null || drawingUpdates.getIsActive().equals("")){
+            drawingUpdates.setIsActive(existingDrawing.getIsActive());
+        }
+
+
             return drawingRepository.save(drawingUpdates);
     }
 
@@ -74,12 +80,30 @@ public class DefaultDrawingService implements DrawingService {
 
       if(drawing.getWinningTicketId() == null){
           drawing.setWinningTicketId(winningTicket.getId());
+          drawing.setIsActive(Boolean.FALSE);
 
       } else {
           // do nothing since a winner for this drawing has already been selected.
       }
 
         return drawingRepository.save(drawing);
+    }
+
+    @Override
+    public List<Drawing> findActiveDrawings() {
+        return drawingRepository.findDrawingByIsActive(Boolean.TRUE);
+    }
+
+    @Override
+    public List<Drawing> findInactiveDrawings() {
+        return drawingRepository.findDrawingByIsActive(Boolean.FALSE);
+    }
+
+    @Override
+    public void cancelDrawing(Long id) {
+        Drawing drawing = findDrawingById(id);
+        drawing.setIsActive(Boolean.FALSE);
+        drawingRepository.save(drawing);
     }
 
 

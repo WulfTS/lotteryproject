@@ -13,9 +13,11 @@
         <th>Date</th>
         <th>Time</th>
         <th>Max Tickets</th>
+        <th>Active</th>
         <th>View</th>
         <th>Update</th>
         <th>Draw</th>
+        <th>Cancel</th>
         <th>Winning Ticket</th>
         <th>Person</th>
 
@@ -27,15 +29,21 @@
         <td th:text="${#dates.format(drawing.time, 'yyyy-MM-dd')}"/>
         <td th:text="${#dates.format(drawing.time, 'HH:mm')}"/>
         <td th:text="${drawing.maxTickets}"/>
+        <td th:text="${drawing.isActive}"/>
+
 
         <td>
             <a th:href="${'/drawings/' + {drawing.id}}">View</a>
         </td>
         <td>
-            <a th:href="${'/drawings/' + {drawing.id}} + '/update'"th:text = "${drawing.winningTicketId != null} ? ' ': 'Update'"></a>
+            <a th:href="${'/drawings/' + {drawing.id}} + '/update'"th:text = "${drawing.isActive != true} ? ' ': 'Update'"></a>
         </td>
         <td >
-            <a th:href="${'/drawing/' + {drawing.id}} + '/drawWinner'" th:text = "${drawing.winningTicketId != null} ? ' ': 'Draw'"></a>
+            <a th:href="${'/drawing/' + {drawing.id}} + '/drawWinner'" th:text = "${drawing.isActive != true} ? ' ': 'Draw'"></a>
+
+        </td>
+        <td >
+            <a th:href="${'/drawing/' + {drawing.id}} + '/cancel'" th:text = "${drawing.isActive != true} ? ' ': 'Cancel'"></a>
 
         </td>
         <td th:text = "${drawing.winningTicketId}"/>

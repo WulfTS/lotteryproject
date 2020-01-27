@@ -36,27 +36,37 @@ public class Drawing {
 
     Long winningTicketId;
 
+    @NotNull
+    Boolean isActive;
+
     // Constructors
    public Drawing(String name, Date time) {
         this.name = name;
         this.time = time;
+        this.isActive = Boolean.TRUE;
     }
 
     public Drawing (String name) throws ParseException {
         this.name = name;
         this.time = new SimpleDateFormat("yyyy-MM-dd").parse(defaultDate);
+        this.isActive = Boolean.TRUE;
+
     }
 
     public Drawing(String name, Date time, Integer maxTickets){
         this.name = name;
         this.time =  time;
         this.maxTickets = maxTickets;
+        this.isActive = Boolean.TRUE;
+
     }
 
     public Drawing(String name, Integer maxTickets) throws ParseException {
        this.name = name;
        this.maxTickets = maxTickets;
        this.time = new SimpleDateFormat("yyyy-MM-dd").parse(defaultDate);
+       this.isActive = Boolean.TRUE;
+
     }
 
 
