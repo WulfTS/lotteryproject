@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,8 +58,6 @@ public class DefaultDrawingController  {
         return "/drawing/displayAllDrawings";
     }
 
-
-
     // display new drawing form
     @GetMapping(value = "drawings/add")
     public String addDrawing(){
@@ -71,13 +67,6 @@ public class DefaultDrawingController  {
     // add new data to
     @PostMapping(value = "drawings/add")
     public String addDrawing(@ModelAttribute("drawing") DrawingDTO drawingDTO, Model model) throws ParseException {
-        if(drawingDTO.getTimeString() == null || drawingDTO.getTimeString().equals("")){
-            drawingDTO.setTimeString(DrawingDTO.defaultTimeString);
-        }
-
-        if(drawingDTO.getDateString() == null || drawingDTO.getDateString().equals("")){
-            drawingDTO.setDateString(DrawingDTO.defaultDateString);
-        }
         DrawingDTO result = drawingDelegate.addDrawing(drawingDTO);
         model.addAttribute("drawing",result);
         return "/drawing/displayDrawing";
@@ -99,25 +88,9 @@ public class DefaultDrawingController  {
         return "/drawing/drawingUpdateForm";
     }
 
-
     // Actually update drawing
     @PostMapping(value = "/drawings")
     public String updateDrawingData(@ModelAttribute("drawingUpdate") DrawingDTO drawingDTO, Model model) throws ParseException {
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        DrawingDTO oldDrawing = drawingDelegate.findDrawingById(drawingDTO.getId());
-
-        if(drawingDTO.getTimeString()== null || drawingDTO.getTimeString().equals("")){
-
-            drawingDTO.setTimeString(timeFormat.format(oldDrawing.getTime()));
-        }
-
-        if(drawingDTO.getDateString() == null || drawingDTO.getDateString().equals("")){
-
-            drawingDTO.setDateString(dateFormat.format(oldDrawing.getTime()));
-        }
-
         DrawingDTO result = drawingDelegate.editDrawing(drawingDTO);
         model.addAttribute("drawing", result);
         return "/drawing/displayDrawing";
