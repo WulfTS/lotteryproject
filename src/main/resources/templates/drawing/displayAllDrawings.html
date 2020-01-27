@@ -40,7 +40,7 @@
         </td>
         <td th:text = "${drawing.winningTicketId}"/>
         <td>
-            <span th:if="${drawing.winningTicketId != null}"><a th:href="${'/person/' + {ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}}" th:text ="${ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}" ></a></span>
+            <span th:if="${drawing.winningTicketId != null}"><a th:href="${'/person/' + {ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}}" th:text ="${ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId != null} ? ${{personDelegate.findPersonById(ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId).firstName} + ' ' +{personDelegate.findPersonById(ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId).lastName} } : ' ' "></a></span>
         </td>
 
 
