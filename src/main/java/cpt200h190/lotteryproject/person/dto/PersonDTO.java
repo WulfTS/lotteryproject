@@ -17,7 +17,7 @@ public class PersonDTO {
     private UUID id;
 
     @JsonProperty
-    private Long humanReadableId;
+    private String humanReadableId;
 
     @JsonProperty
     private String firstName;

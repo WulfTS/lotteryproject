@@ -8,15 +8,16 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Random;
 import java.util.UUID;
 
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "seq",initialValue = 1)
 public class Person {
+    private Random random = new Random();
 
 
     @Id
@@ -25,6 +26,7 @@ public class Person {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
+    @Column(unique = true)
     private String humanReadableId;
 
     @Column
@@ -42,12 +44,19 @@ public class Person {
     @NotNull
     private Boolean isActive;
 
+    public Person(){
+        isActive = Boolean.TRUE;
+        this.humanReadableId = "z" + "z" + random.nextInt(9999);
+
+    }
+
     public Person(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         isActive = Boolean.TRUE;
+        this.humanReadableId = firstName.substring(0,1)+lastName.substring(0,1)+ Integer.toString(random.nextInt(999999));
     }
 
     public Person(String firstName, String lastName, String email){
@@ -55,6 +64,7 @@ public class Person {
         this.lastName = lastName;
         this.email = email;
         isActive = Boolean.TRUE;
+        this.humanReadableId = firstName.substring(0,1)+ lastName.substring(0,1)+ Integer.toString(random.nextInt(999999));
     }
 
 
