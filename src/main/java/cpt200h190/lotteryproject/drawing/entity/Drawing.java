@@ -1,5 +1,6 @@
 package cpt200h190.lotteryproject.drawing.entity;
 
+import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +22,7 @@ import java.util.UUID;
 public class Drawing {
 
     private String defaultDate = "9999-12-31";
+    private static HumanReadableIdGenerator humanReadableIdGenerator;
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -29,12 +30,14 @@ public class Drawing {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
+    @Column(unique = true)
+    private String humanReadableId;
+
     @NotNull
     String name;
 
     Date time;
 
-    @Min(2)
     Integer maxTickets;
 
     UUID winningTicketId;
@@ -47,12 +50,15 @@ public class Drawing {
         this.name = name;
         this.time = time;
         this.isActive = Boolean.TRUE;
-    }
+        this.humanReadableId = HumanReadableIdGenerator.GenerateDrawingValue(name);
+
+   }
 
     public Drawing (String name) throws ParseException {
         this.name = name;
         this.time = new SimpleDateFormat("yyyy-MM-dd").parse(defaultDate);
         this.isActive = Boolean.TRUE;
+        this.humanReadableId = HumanReadableIdGenerator.GenerateDrawingValue(name);
 
     }
 
@@ -61,6 +67,8 @@ public class Drawing {
         this.time =  time;
         this.maxTickets = maxTickets;
         this.isActive = Boolean.TRUE;
+        this.humanReadableId = HumanReadableIdGenerator.GenerateDrawingValue(name);
+
 
     }
 
@@ -69,6 +77,8 @@ public class Drawing {
        this.maxTickets = maxTickets;
        this.time = new SimpleDateFormat("yyyy-MM-dd").parse(defaultDate);
        this.isActive = Boolean.TRUE;
+       this.humanReadableId = HumanReadableIdGenerator.GenerateDrawingValue(name);
+
 
     }
 

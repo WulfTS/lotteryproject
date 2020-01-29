@@ -1,24 +1,22 @@
 package cpt200h190.lotteryproject.person.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerator;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Random;
 import java.util.UUID;
+
 
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "seq",initialValue = 1)
 public class Person {
-    private Random random = new Random();
 
+    private static HumanReadableIdGenerator humanReadableIdGenerator;
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -44,19 +42,13 @@ public class Person {
     @NotNull
     private Boolean isActive;
 
-    public Person(){
-        isActive = Boolean.TRUE;
-        this.humanReadableId = "z" + "z" + random.nextInt(9999);
-
-    }
-
     public Person(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         isActive = Boolean.TRUE;
-        this.humanReadableId = firstName.substring(0,1)+lastName.substring(0,1)+ Integer.toString(random.nextInt(999999));
+        this.humanReadableId = HumanReadableIdGenerator.GeneratePersonValue(firstName,lastName);
     }
 
     public Person(String firstName, String lastName, String email){
@@ -64,7 +56,7 @@ public class Person {
         this.lastName = lastName;
         this.email = email;
         isActive = Boolean.TRUE;
-        this.humanReadableId = firstName.substring(0,1)+ lastName.substring(0,1)+ Integer.toString(random.nextInt(999999));
+        this.humanReadableId = HumanReadableIdGenerator.GeneratePersonValue(firstName,lastName);
     }
 
 

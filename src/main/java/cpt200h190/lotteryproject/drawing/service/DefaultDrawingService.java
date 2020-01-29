@@ -3,6 +3,7 @@ package cpt200h190.lotteryproject.drawing.service;
 import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import cpt200h190.lotteryproject.drawing.exceptions.DrawingNotFoundException;
 import cpt200h190.lotteryproject.drawing.repository.DrawingRepository;
+import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerator;
 import cpt200h190.lotteryproject.ticket.entity.Ticket;
 import cpt200h190.lotteryproject.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class DefaultDrawingService implements DrawingService {
 
     private final DrawingRepository drawingRepository;
     private final TicketService ticketService;
+    private final HumanReadableIdGenerator humanReadableIdGenerator;
 
     @Override
     public List<Drawing> getAllDrawings() {
@@ -29,6 +31,7 @@ public class DefaultDrawingService implements DrawingService {
     @Override
     public Drawing addDrawing(Drawing drawingToAdd) {
         drawingToAdd.setIsActive(Boolean.TRUE);
+        drawingToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateDrawingValue(drawingToAdd.getName()));
         return drawingRepository.save(drawingToAdd);
     }
 
@@ -57,6 +60,8 @@ public class DefaultDrawingService implements DrawingService {
         if(drawingUpdates.getIsActive() == null || drawingUpdates.getIsActive().equals("")){
             drawingUpdates.setIsActive(existingDrawing.getIsActive());
         }
+
+        drawingUpdates.setHumanReadableId(existingDrawing.getHumanReadableId());
 
 
             return drawingRepository.save(drawingUpdates);

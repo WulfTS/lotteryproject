@@ -1,5 +1,6 @@
 package cpt200h190.lotteryproject.person.service;
 
+import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerator;
 import cpt200h190.lotteryproject.person.entity.Person;
 import cpt200h190.lotteryproject.person.exceptions.PersonNotFoundException;
 import cpt200h190.lotteryproject.person.repository.PersonRepository;
@@ -9,12 +10,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 class DefaultPersonService implements PersonService {
+    Random random = new Random();
     private final PersonRepository personRepository;
+    private final HumanReadableIdGenerator humanReadableIdGenerator;
 
     @Override
     public List<Person> getAllPeople() {
@@ -32,6 +36,7 @@ class DefaultPersonService implements PersonService {
     @Override
     public Person addPerson(Person personToAdd) {
         personToAdd.setIsActive(Boolean.TRUE);
+        personToAdd.setHumanReadableId(HumanReadableIdGenerator.GeneratePersonValue(personToAdd.getFirstName(),personToAdd.getLastName()));
         return personRepository.save(personToAdd);
     }
 
@@ -63,6 +68,7 @@ class DefaultPersonService implements PersonService {
         if (personUpdates.getIsActive() == null || personUpdates.getIsActive().equals("")){
             personUpdates.setIsActive(existingPerson.getIsActive());
         }
+        personUpdates.setHumanReadableId(existingPerson.getHumanReadableId());
 
         return personRepository.save(personUpdates);
     }

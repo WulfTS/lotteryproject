@@ -1,5 +1,6 @@
 package cpt200h190.lotteryproject.ticket.service;
 
+import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerator;
 import cpt200h190.lotteryproject.ticket.entity.Ticket;
 import cpt200h190.lotteryproject.ticket.exceptions.TicketNotFoundException;
 import cpt200h190.lotteryproject.ticket.repository.TicketRepository;
@@ -23,6 +24,7 @@ public class DefaultTicketService implements TicketService {
 
     @Override
     public Ticket addTicket(Ticket ticketToAdd) {
+        ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getColor()));
         return ticketRepository.save(ticketToAdd);
     }
 
@@ -40,6 +42,7 @@ public class DefaultTicketService implements TicketService {
         if(ticketUpdates.getPersonId() == null){
             ticketUpdates.setPersonId(existingTicket.getPersonId());
         }
+        ticketUpdates.setHumanReadableId(existingTicket.getHumanReadableId());
 
         return ticketRepository.save(ticketUpdates);
     }

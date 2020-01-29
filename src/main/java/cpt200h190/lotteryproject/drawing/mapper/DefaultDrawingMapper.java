@@ -10,14 +10,10 @@ import java.text.SimpleDateFormat;
 @Service
 public class DefaultDrawingMapper implements DrawingMapper {
 
-
-
-
     @Override
     public Drawing mapDrawingDTOtoDrawing(DrawingDTO drawingDTO) throws ParseException {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
 
         return Drawing.builder()
                 .id(drawingDTO.getId())
@@ -26,6 +22,7 @@ public class DefaultDrawingMapper implements DrawingMapper {
                 .maxTickets(drawingDTO.getMaxTickets())
                 .winningTicketId(drawingDTO.getWinningTicketId())
                 .isActive(drawingDTO.getIsActive())
+                .humanReadableId(drawingDTO.getHumanReadableId())
                 .build();
     }
 
@@ -38,6 +35,7 @@ public class DefaultDrawingMapper implements DrawingMapper {
                 .maxTickets(drawing.getMaxTickets())
                 .winningTicketId(drawing.getWinningTicketId())
                 .isActive(drawing.getIsActive())
+                .humanReadableId(drawing.getHumanReadableId())
                 .build();
     }
 }

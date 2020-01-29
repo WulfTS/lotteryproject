@@ -24,7 +24,7 @@
     </tr>
 
     <tr th:each="drawing: ${drawingList}">
-        <td th:text="${drawing.id}"/>
+        <td th:text="${drawing.humanReadableId}"/>
         <td th:text="${drawing.name}"/>
         <td th:text="${#dates.format(drawing.time, 'yyyy-MM-dd')}"/>
         <td th:text="${#dates.format(drawing.time, 'HH:mm')}"/>

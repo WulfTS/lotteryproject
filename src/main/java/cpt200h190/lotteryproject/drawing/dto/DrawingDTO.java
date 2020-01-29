@@ -20,6 +20,9 @@ public class DrawingDTO {
     private UUID id;
 
     @JsonProperty
+    private String humanReadableId;
+
+    @JsonProperty
     private String name;
 
     @JsonProperty

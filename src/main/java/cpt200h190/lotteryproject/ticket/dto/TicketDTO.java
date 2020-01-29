@@ -16,6 +16,12 @@ public class TicketDTO {
     private UUID id;
 
     @JsonProperty
+    private String humanReadableId;
+
+    @JsonProperty
+    private String color;
+
+    @JsonProperty
     private UUID drawingId;
 
     @JsonProperty
