@@ -47,8 +47,6 @@ public class DefaultTicketController {
         TicketDTO ticket = ticketDelegate.findTicketById(id);
         String drawingName = drawingDelegate.findDrawingById(ticket.getDrawingId()).getName();
 
-
-
         if(ticket.getPersonId() == null){
             personName = "";
         } else {

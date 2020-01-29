@@ -1,7 +1,10 @@
 package cpt200h190.lotteryproject.ticket.service;
 
+import cpt200h190.lotteryproject.drawing.entity.Drawing;
+import cpt200h190.lotteryproject.drawing.service.DrawingService;
 import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerator;
 import cpt200h190.lotteryproject.ticket.entity.Ticket;
+import cpt200h190.lotteryproject.ticket.exceptions.MaximumTicketsException;
 import cpt200h190.lotteryproject.ticket.exceptions.TicketNotFoundException;
 import cpt200h190.lotteryproject.ticket.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class DefaultTicketService implements TicketService {
     private final TicketRepository ticketRepository;
+    private final DrawingService drawingService;
 
     @Override
     public List<Ticket> getAllTickets() {
@@ -24,6 +28,10 @@ public class DefaultTicketService implements TicketService {
 
     @Override
     public Ticket addTicket(Ticket ticketToAdd) {
+        Drawing drawing = drawingService.findDrawingById(ticketToAdd.getDrawingId());
+        if(ticketRepository.findTicketByDrawingId(ticketToAdd.getDrawingId()).size() >= drawing.getMaxTickets()){
+            throw new MaximumTicketsException(drawing.getHumanReadableId() + " " + drawing.getName());
+        }
         ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getColor()));
         return ticketRepository.save(ticketToAdd);
     }

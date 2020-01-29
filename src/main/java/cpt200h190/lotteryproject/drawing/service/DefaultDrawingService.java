@@ -20,8 +20,13 @@ import java.util.UUID;
 public class DefaultDrawingService implements DrawingService {
 
     private final DrawingRepository drawingRepository;
-    private final TicketService ticketService;
+    private TicketService ticketService;
     private final HumanReadableIdGenerator humanReadableIdGenerator;
+
+    @Autowired
+    public void setCircB(TicketService ticketService){
+        this.ticketService = ticketService;
+    }
 
     @Override
     public List<Drawing> getAllDrawings() {

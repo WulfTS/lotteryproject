@@ -8,20 +8,26 @@
 <table>
     <h1>Tickets Summary</h1>
     <tr>
-        <th>Ticket Number</th>
+        <th style="display: none">Ticket Number</th>
+        <th>Ticket Ref</th>
         <th>Drawing Name</th>
+        <th>Drawing Ref</th>
         <th>Person</th>
+        <th>Person Ref</th>
         <th>View</th>
         <th>Update</th>
     </tr>
 
     <tr th:each="ticket: ${ticketList}">
-        <td th:text="${ticket.humanReadableId}"/>
+        <td style="display: none" th:text="${ticket.id}"/>
+        <td th:text = "${ticket.humanReadableId}"/>
         <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingDelegate.findDrawingById(ticket.drawingId).getName()}"/></td>
+        <td th:text = "${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
         <td>
             <a th:href="${'/person/' + {ticket.personId}}" th:text = "${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getFirstName()} + ' ' +${personDelegate.findPersonById(ticket.personId).getLastName()} " ></a>
 
        </td>
+        <td th:text = "${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
         <td>
             <a th:href="${'/tickets/' + {ticket.id}}">View</a>
         </td>

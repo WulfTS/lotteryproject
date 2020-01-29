@@ -93,6 +93,8 @@ public class DefaultDrawingController  {
     public String updateDrawingData(@ModelAttribute("drawingUpdate") DrawingDTO drawingDTO, Model model) throws ParseException {
         DrawingDTO result = drawingDelegate.editDrawing(drawingDTO);
         model.addAttribute("drawing", result);
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(result.getId()));
+
         return "/drawing/displayDrawing";
     }
 
