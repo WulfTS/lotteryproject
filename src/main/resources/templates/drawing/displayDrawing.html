@@ -56,13 +56,15 @@
 <div>
     <h4>Tickets</h4>
     <table>
+        <th style="display: none">Ticket ID</th>
+        <th>Ticket Reference</th>
+        <th>Person ID</th>
+        <th>Drawing ID</th>
 
         <tr th:each="ticket: ${ticketList}">
-            <td><label>Ticket Number: </label></td>
-            <td th:text="${ticket.id}"/>
-            <td><label>Person ID: </label></td>
-            <td th:text="${ticket.personId}"/>
-            <td><label>Drawing ID:</label></td>
+            <td style="display:none;" th:text="${ticket.id}"/>
+            <td th:text = "${ticket.humanReadableId}">
+            <td  th:text="${ticket.personId}"/>
             <td th:text="${ticket.drawingId}"/>
 
         </tr>

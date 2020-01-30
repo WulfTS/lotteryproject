@@ -1,5 +1,6 @@
 package cpt200h190.lotteryproject.person.controller;
 
+import cpt200h190.lotteryproject.drawing.delegate.DrawingDelegate;
 import cpt200h190.lotteryproject.person.delegate.PersonDelegate;
 import cpt200h190.lotteryproject.person.dto.PersonDTO;
 import cpt200h190.lotteryproject.ticket.delegate.TicketDelegate;
@@ -18,6 +19,7 @@ public class DefaultPersonController {
 
     private final PersonDelegate personDelegate;
     private final TicketDelegate ticketDelegate;
+    private final DrawingDelegate drawingDelegate;
 
     public PersonDTO getPersonById(UUID id){
         return personDelegate.findPersonById(id);
@@ -82,6 +84,8 @@ public class DefaultPersonController {
     public String displayPerson(@PathVariable UUID id, Model model){
         PersonDTO person = personDelegate.findPersonById(id);
         model.addAttribute("person", person);
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("drawingDelegate", drawingDelegate);
         model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(id));
         return "person/displayPerson";
     }
@@ -98,6 +102,7 @@ public class DefaultPersonController {
     public String updatePersonData( @ModelAttribute("personUpdate") PersonDTO personDTO, Model model){
         PersonDTO result = personDelegate.editPerson(personDTO);
         model.addAttribute("person",result);
+        model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(result.getId()));
         return "person/displayPerson";
     }
 

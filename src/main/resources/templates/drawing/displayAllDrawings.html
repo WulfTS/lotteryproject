@@ -46,7 +46,6 @@
             <a th:href="${'/drawing/' + {drawing.id}} + '/cancel'" th:text = "${drawing.isActive != true} ? ' ': 'Cancel'"></a>
 
         </td>
-        <td th:text = "${drawing.winningTicketId}"/>
         <td>
             <span th:if="${drawing.winningTicketId != null}">
                 <a th:href="${'/person/' + {ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}}"

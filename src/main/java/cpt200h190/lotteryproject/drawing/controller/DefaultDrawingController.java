@@ -77,6 +77,8 @@ public class DefaultDrawingController  {
     public String displayDrawing(@PathVariable UUID id, Model model){
         DrawingDTO drawing = drawingDelegate.findDrawingById(id);
         model.addAttribute("drawing", drawing);
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("drawingDelegate",drawingDelegate);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
         return "/drawing/displayDrawing";
     }
@@ -85,6 +87,8 @@ public class DefaultDrawingController  {
     @GetMapping(value = "drawings/{id}/update")
     public String editDrawing(@PathVariable UUID id, Model model){
         model.addAttribute("existingDrawing", drawingDelegate.findDrawingById(id));
+        model.addAttribute("drawingDelegate",drawingDelegate);
+        model.addAttribute("personDelegate",personDelegate);
         return "/drawing/drawingUpdateForm";
     }
 
@@ -117,6 +121,8 @@ public class DefaultDrawingController  {
         DrawingDTO result = drawingDelegate.drawWinner(drawingDTO.getId());
         model.addAttribute("drawing",result);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(drawingDTO.getId()));
+        model.addAttribute("drawingDelegate",drawingDelegate);
+        model.addAttribute("personDelegate",personDelegate);
         return  "/drawing/displayDrawing";
     }
 

@@ -56,15 +56,19 @@
 <div>
     <h4>Tickets</h4>
     <table>
+        <tr>
+            <th>Ticket Ref</th>
+            <th>Person Ref</th>
+            <th>Drawing Ref</th>
+            <th>Drawing Name</th>
+
+        </tr>
 
         <tr th:each="ticket: ${ticketList}">
-            <td><label>Ticket Number: </label></td>
-            <td th:text="${ticket.id}"/>
-            <td><label>Person ID: </label></td>
-            <td th:text="${ticket.personId}"/>
-            <td><label>Drawing ID:</label></td>
-            <td th:text="${ticket.drawingId}"/>
-
+            <td th:text="${ticket.humanReadableId}"/>
+            <td th:text="${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
+            <td th:text="${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
+            <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingDelegate.findDrawingById(ticket.drawingId).getName()}"/></td>
         </tr>
 
 
