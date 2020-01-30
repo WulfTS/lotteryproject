@@ -99,7 +99,9 @@ public class DefaultDrawingController  {
         DrawingDTO result = drawingDelegate.editDrawing(drawingDTO);
         model.addAttribute("drawing", result);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(result.getId()));
-
+        model.addAttribute("drawingDelegate",drawingDelegate);
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("ticketDelegate",ticketDelegate);
         return "/drawing/displayDrawing";
     }
 
@@ -108,6 +110,9 @@ public class DefaultDrawingController  {
        DrawingDTO drawingDTO = drawingDelegate.drawWinner(id);
        model.addAttribute("drawing", drawingDTO);
        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+        model.addAttribute("drawingDelegate",drawingDelegate);
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("ticketDelegate",ticketDelegate);
        return "/drawing/displayDrawing";
     }
 

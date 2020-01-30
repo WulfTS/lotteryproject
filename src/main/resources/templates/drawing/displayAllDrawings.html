@@ -53,7 +53,6 @@
                    th:text ="${ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId != null} ?
                         ${{personDelegate.findPersonById(ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId).firstName} + ' '
                         +{personDelegate.findPersonById(ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId).lastName} } : ' ' "></a>
-
         </td>
 
 
