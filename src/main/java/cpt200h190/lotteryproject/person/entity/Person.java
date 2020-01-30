@@ -4,6 +4,7 @@ import cpt200h190.lotteryproject.humanreadableidgenerator.HumanReadableIdGenerat
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -28,14 +29,16 @@ public class Person {
     private String humanReadableId;
 
     @Column
-    @NotNull
+    @NotNull(message = "First name is required")
     private String firstName;
 
-    @NotNull
+    @NotNull(message = "Last name is required.")
     private String lastName;
 
+    @Email(message = "Invalid email.  Try again.")
     @NotNull
     private String email;
+
 
     private String phoneNumber;
 

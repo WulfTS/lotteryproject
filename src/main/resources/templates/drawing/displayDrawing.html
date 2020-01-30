@@ -69,11 +69,12 @@
                 <a th:href="${'/person/' + {ticket.personId}}"
                    th:text ="${ticketDelegate.findTicketById(ticket.id) != null} ?
                         ${{personDelegate.findPersonById(ticketDelegate.findTicketById(ticket.id).personId).firstName} + ' '
-                        +{personDelegate.findPersonById(ticketDelegate.findTicketById(ticket.id).personId).lastName} } : ' ' "></a>
+                        +{personDelegate.findPersonById(ticketDelegate.findTicketById(ticket.id).personId).lastName} } : ' n/a'"></a>
+
+            </td>
+
             </td>
             <td th:text = "${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
-
-
         </tr>
 
 

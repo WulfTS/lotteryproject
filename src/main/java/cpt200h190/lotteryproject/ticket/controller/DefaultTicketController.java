@@ -56,6 +56,8 @@ public class DefaultTicketController {
         model.addAttribute("ticket",ticket);
         model.addAttribute("drawingName",drawingName);
         model.addAttribute("personName", personName);
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("drawingDelegate",drawingDelegate);
 
         model.addAttribute("ticketList",ticketDelegate.getAllTickets());
 
@@ -88,6 +90,8 @@ public class DefaultTicketController {
 
        model.addAttribute("drawingName",drawingName);
        model.addAttribute("personName", personName);
+       model.addAttribute("personDelegate",personDelegate);
+       model.addAttribute("drawingDelegate",drawingDelegate);
 
        return "/ticket/displayTicket";
     }

@@ -6,43 +6,88 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="post" action="/people/add" modelAttribute="person">
-        <h1> Person Form</h1>
-        <table>
-            <tr>
-                <td>
-                    <label>First Name: </label>
-                     <input type="text" name="firstName">
-                </td>
-            </tr>
+<form method="post" action="/person/" modelAttribute="person">
+    <h1> Person Form</h1>
+    <table>
+        <tr>
+            <td>
+                <label text = 'Person Ref'> </label>
+                <span th:text = "${existingPerson.humanReadableId}"></span>
+            </td>
+            <td>
+                <label>
+                    <input type="hidden" name="id" th:value = "${existingPerson.id}"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Active: </span>
+                <span th:text = "${existingPerson.isActive}"></span>
+            </td>
+            <td>
+                <label>
+                    <input type="hidden" name="isActive" th:value = "${existingPerson.isActive}"/>
+                </label>
+            </td>
+        </tr>
 
-            <tr
-                ><td>
-                    <label> Last Name: </label>
-                    <input type="text" name="lastName">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label> Email </label>
-                    <input type="text" name="email">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Phone</label>
-                    <input type="text" name="phoneNumber">
-                </td></tr>
+        <tr>
+            <td>
+                <label>First Name: </label>
+                <label>
+                    <input type="text" name="firstName"
+                           th:placeholder="${existingPerson.firstName}"
+                           th:value = "${existingPerson.firstName}"
+                    >
+                </label>
+            </td>
+        </tr>
+        <tr
+        ><td>
+            <label> Last Name: </label>
+            <label>
+                <input type="text" name="lastName"
+                       th:placeholder = "${existingPerson.lastName}"
+                       th:value = "${existingPerson.lastName}"
+                >
+            </label>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <label> Email </label>
+                <label>
+                    <input type="text" name="email"
+                           th:placeholder = "${existingPerson.email}"
+                           th:value = "${existingPerson.email}"
+                    >
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Phone</label>
+                <label>
+                    <input type="text" name="phoneNumber"
+                           th:placeholder = "${existingPerson.phoneNumber}"
+                           th:value = "${existingPerson.phoneNumber}"
+                    >
+                </label>
+            </td></tr>
 
-            <tr>
-                <td>
-                    <button type="submit">Submit</button>
-                    <button type = "reset">Reset</button>
-                </td>
-            </tr>
-        </table>
+        <tr>
 
-    </form>
+
+
+            <td>
+                <button type="submit">Submit</button>
+                <button type = "reset">Reset</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
 
 
 

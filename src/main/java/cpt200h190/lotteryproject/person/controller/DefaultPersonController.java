@@ -8,8 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,22 +41,14 @@ public class DefaultPersonController {
     // display people homepage
     @GetMapping(value = "/people")
     public String homepage(){
-
         return "person/peopleHome";
     }
 
     // display person form
     @GetMapping("people/add")
-    public String displayPersonForm(){
+    public String displayPersonForm(Model model){
+        model.addAttribute("existingPerson",new PersonDTO());
         return "person/personForm";
-    }
-
-    // Add a person to the database  Display person form with newly added data
-    @PostMapping("/people/add")
-    public String addPersonByDto(@ModelAttribute("person") PersonDTO personDTO, Model model) {
-        PersonDTO result = personDelegate.addPerson(personDTO);
-        model.addAttribute("person", result);
-        return "person/displayPerson";
     }
 
     // list all people in database
@@ -94,15 +88,35 @@ public class DefaultPersonController {
     @GetMapping(value="/person/{id}/update")
     public String displayUpdateForm(@PathVariable UUID id,  Model model){
         model.addAttribute("existingPerson", personDelegate.findPersonById(id));
-        return "person/personUpdateForm";
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("drawingDelegate", drawingDelegate);
+        model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(id));
+        return "/person/personForm";
     }
 
     // actually update person
     @PostMapping(value ="/person/" )
-    public String updatePersonData( @ModelAttribute("personUpdate") PersonDTO personDTO, Model model){
-        PersonDTO result = personDelegate.editPerson(personDTO);
+    public String updatePersonData(@ModelAttribute("person") @Valid PersonDTO personDTO, Errors errors, Model model){
+        PersonDTO result = null;
+
+        if(personDTO.getId()== null){
+            if(errors.hasErrors()){
+                model.addAttribute("existingPerson",new PersonDTO());
+                return "/person/personForm";
+            }
+            result = personDelegate.addPerson(personDTO);
+        } else {
+            if(errors.hasErrors()){
+                model.addAttribute("existingPerson",personDelegate.findPersonById(personDTO.getId()));
+                return "/person/personForm";
+            }
+            result = personDelegate.editPerson(personDTO);
+        }
+
         model.addAttribute("person",result);
         model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(result.getId()));
+        model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("drawingDelegate", drawingDelegate);
         return "person/displayPerson";
     }
 
@@ -111,7 +125,7 @@ public class DefaultPersonController {
         personDelegate.changeActiveStatusById(id);
         PersonDTO result = personDelegate.findPersonById(id);
         model.addAttribute("person",result);
-        return "person/displayPerson";
+        return "redirect:/people/all";
 
     }
 

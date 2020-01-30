@@ -8,11 +8,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +39,7 @@ public class DefaultDrawingController  {
         model.addAttribute("drawingList",drawingList);
         model.addAttribute("ticketDelegate",ticketDelegate);
         model.addAttribute("personDelegate",personDelegate);
-        return "/drawing/displayAllDrawings";
+        return "/drawing/displayDrawingList";
     }
 
     @GetMapping(value = "drawings/active")
@@ -46,7 +48,7 @@ public class DefaultDrawingController  {
         model.addAttribute("drawingList",drawingList);
         model.addAttribute("ticketDelegate",ticketDelegate);
         model.addAttribute("personDelegate",personDelegate);
-        return "/drawing/displayAllDrawings";
+        return "/drawing/displayDrawingList";
     }
 
     @GetMapping(value = "drawings/inactive")
@@ -55,21 +57,14 @@ public class DefaultDrawingController  {
         model.addAttribute("drawingList",drawingList);
         model.addAttribute("ticketDelegate",ticketDelegate);
         model.addAttribute("personDelegate",personDelegate);
-        return "/drawing/displayAllDrawings";
+        return "/drawing/displayDrawingList";
     }
 
     // display new drawing form
     @GetMapping(value = "drawings/add")
-    public String addDrawing(){
+    public String addDrawing(Model model){
+        model.addAttribute("existingDrawing",new DrawingDTO());
         return "/drawing/drawingForm";
-    }
-
-    // add new data to
-    @PostMapping(value = "drawings/add")
-    public String addDrawing(@ModelAttribute("drawing") DrawingDTO drawingDTO, Model model) throws ParseException {
-        DrawingDTO result = drawingDelegate.addDrawing(drawingDTO);
-        model.addAttribute("drawing",result);
-        return "/drawing/displayDrawing";
     }
 
     //display individual drawing
@@ -88,22 +83,38 @@ public class DefaultDrawingController  {
     @GetMapping(value = "drawings/{id}/update")
     public String editDrawing(@PathVariable UUID id, Model model){
         model.addAttribute("existingDrawing", drawingDelegate.findDrawingById(id));
-        model.addAttribute("drawingDelegate",drawingDelegate);
-        model.addAttribute("personDelegate",personDelegate);
-        return "/drawing/drawingUpdateForm";
+        return "/drawing/drawingForm";
     }
 
     // Actually update drawing
     @PostMapping(value = "/drawings")
-    public String updateDrawingData(@ModelAttribute("drawingUpdate") DrawingDTO drawingDTO, Model model) throws ParseException {
-        DrawingDTO result = drawingDelegate.editDrawing(drawingDTO);
+    public String updateDrawingData(@ModelAttribute("drawing") @Valid DrawingDTO drawingDTO, Errors errors, Model model) throws ParseException {
+        DrawingDTO result = null;
+
+
+        if (drawingDTO.getId() == null) {
+            if (errors.hasErrors()) {
+                model.addAttribute("existingDrawing", new DrawingDTO());
+                return "/drawing/drawingForm";
+            }
+            result = drawingDelegate.addDrawing(drawingDTO);
+        } else {
+            if (errors.hasErrors()) {
+                model.addAttribute("existingDrawing", drawingDelegate.findDrawingById(drawingDTO.getId()));
+                return "/drawing/drawingForm";
+            }
+
+            result = drawingDelegate.editDrawing(drawingDTO);
+        }
+
         model.addAttribute("drawing", result);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(result.getId()));
-        model.addAttribute("drawingDelegate",drawingDelegate);
-        model.addAttribute("personDelegate",personDelegate);
-        model.addAttribute("ticketDelegate",ticketDelegate);
+        model.addAttribute("drawingDelegate", drawingDelegate);
+        model.addAttribute("personDelegate", personDelegate);
+        model.addAttribute("ticketDelegate", ticketDelegate);
         return "/drawing/displayDrawing";
     }
+
 
     @GetMapping(value = "/drawing/{id}/drawWinner")
     public String drawWinner(@PathVariable UUID id, Model model){
@@ -113,7 +124,7 @@ public class DefaultDrawingController  {
         model.addAttribute("drawingDelegate",drawingDelegate);
         model.addAttribute("personDelegate",personDelegate);
         model.addAttribute("ticketDelegate",ticketDelegate);
-       return "/drawing/displayDrawing";
+       return "redirect:/drawings/all";
     }
 
     @GetMapping(value = "/drawings/drawWinner")
@@ -122,14 +133,14 @@ public class DefaultDrawingController  {
         return  "/drawing/drawWinner";
     }
 
-    @PostMapping(value = "/drawings/drawWinner")
+    @PostMapping(value = "/drawings/drawIndividualWinner")
     public String displayWinner(@ModelAttribute DrawingDTO drawingDTO, Model model){
         DrawingDTO result = drawingDelegate.drawWinner(drawingDTO.getId());
         model.addAttribute("drawing",result);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(drawingDTO.getId()));
         model.addAttribute("drawingDelegate",drawingDelegate);
-        model.addAttribute("personDelegate",personDelegate);
         model.addAttribute("ticketDelegate",ticketDelegate);
+        model.addAttribute("personDelegate",personDelegate);
         return  "/drawing/displayDrawing";
     }
 
@@ -139,7 +150,7 @@ public class DefaultDrawingController  {
         DrawingDTO results = drawingDelegate.findDrawingById(id);
         model.addAttribute("drawing", results);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
-        return "/drawing/displayDrawing";
+        return "redirect:/drawings/all";
     }
 
 }
