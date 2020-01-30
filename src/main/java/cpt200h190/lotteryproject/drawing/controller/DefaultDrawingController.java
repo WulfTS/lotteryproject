@@ -79,6 +79,7 @@ public class DefaultDrawingController  {
         model.addAttribute("drawing", drawing);
         model.addAttribute("personDelegate",personDelegate);
         model.addAttribute("drawingDelegate",drawingDelegate);
+        model.addAttribute("ticketDelegate",ticketDelegate);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
         return "/drawing/displayDrawing";
     }
@@ -123,6 +124,7 @@ public class DefaultDrawingController  {
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(drawingDTO.getId()));
         model.addAttribute("drawingDelegate",drawingDelegate);
         model.addAttribute("personDelegate",personDelegate);
+        model.addAttribute("ticketDelegate",ticketDelegate);
         return  "/drawing/displayDrawing";
     }
 

@@ -89,18 +89,16 @@ public class DefaultDrawingService implements DrawingService {
             return new Drawing();
         }
 
-        Integer ticketListSize = ticketList.size();
-        Ticket winningTicket = ticketList.get(random.nextInt(ticketListSize));
+        Ticket winningTicket = ticketList.get(random.nextInt(ticketList.size()));
 
-      if(drawing.getWinningTicketId() == null){
+      if(drawing.getWinningTicketId() == null ){
           drawing.setWinningTicketId(winningTicket.getId());
           drawing.setIsActive(Boolean.FALSE);
 
       } else {
           // do nothing since a winner for this drawing has already been selected.
       }
-
-        return drawingRepository.save(drawing);
+      return drawingRepository.save(drawing);
     }
 
     @Override

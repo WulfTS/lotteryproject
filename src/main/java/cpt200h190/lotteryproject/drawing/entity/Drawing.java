@@ -35,17 +35,17 @@ public class Drawing {
     private String humanReadableId;
 
     @NotNull
-    String name;
+    private String name;
 
-    Date time;
+    private Date time;
 
     @Min(2)
-    Integer maxTickets;
+    private Integer maxTickets;
 
-    UUID winningTicketId;
+    private UUID winningTicketId;
 
     @NotNull
-    Boolean isActive;
+    private Boolean isActive;
 
     // Constructors
    public Drawing(String name, Date time) {

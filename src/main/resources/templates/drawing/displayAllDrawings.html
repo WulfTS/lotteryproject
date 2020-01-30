@@ -44,15 +44,16 @@
         </td>
         <td >
             <a th:href="${'/drawing/' + {drawing.id}} + '/cancel'" th:text = "${drawing.isActive != true} ? ' ': 'Cancel'"></a>
-
         </td>
-        <td>
-            <span th:if="${drawing.winningTicketId != null}">
+
+        <td th:text="${drawing.winningTicketId != null} ? ${ticketDelegate.findTicketById(drawing.winningTicketId).getHumanReadableId()}"/>
+
+        <td th:if="${drawing.winningTicketId != null}">
                 <a th:href="${'/person/' + {ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId}}"
                    th:text ="${ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId != null} ?
                         ${{personDelegate.findPersonById(ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId).firstName} + ' '
                         +{personDelegate.findPersonById(ticketDelegate.findTicketById(drawing.getWinningTicketId()).personId).lastName} } : ' ' "></a>
-            </span>
+
         </td>
 
 
