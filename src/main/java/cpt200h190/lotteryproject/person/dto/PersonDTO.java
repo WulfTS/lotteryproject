@@ -35,6 +35,7 @@ public class PersonDTO {
     private String lastName;
 
     @Email
+    @NotNull
     @JsonProperty
     private String email;
 

@@ -56,20 +56,20 @@ public class DefaultPersonController {
     public String displayPeople(Model model){
         List<PersonDTO> peopleList = personDelegate.getAllPeople();
         model.addAttribute("peopleList",peopleList);
-        return "person/displayAllPeople";
+        return "person/displayPersonList";
     }
     @GetMapping(value="/people/active")
     public String displayActivePeople(Model model){
         List<PersonDTO> peopleList = personDelegate.getActivePeopleList();
         model.addAttribute("peopleList",peopleList);
-        return "person/displayAllPeople";
+        return "person/displayPersonList";
     }
 
     @GetMapping(value="/people/inactive")
     public String displayInactivePeople(Model model){
         List<PersonDTO> peopleList = personDelegate.getInactivePeopleList();
         model.addAttribute("peopleList",peopleList);
-        return "person/displayAllPeople";
+        return "person/displayPeopleList";
     }
 
 
@@ -88,9 +88,6 @@ public class DefaultPersonController {
     @GetMapping(value="/person/{id}/update")
     public String displayUpdateForm(@PathVariable UUID id,  Model model){
         model.addAttribute("existingPerson", personDelegate.findPersonById(id));
-        model.addAttribute("personDelegate",personDelegate);
-        model.addAttribute("drawingDelegate", drawingDelegate);
-        model.addAttribute("ticketList",ticketDelegate.findTicketByPersonId(id));
         return "/person/personForm";
     }
 
