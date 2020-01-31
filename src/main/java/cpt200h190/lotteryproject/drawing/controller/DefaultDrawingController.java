@@ -63,7 +63,7 @@ public class DefaultDrawingController  {
     // display new drawing form
     @GetMapping(value = "drawings/add")
     public String addDrawing(Model model){
-        model.addAttribute("existingDrawing",new DrawingDTO());
+        model.addAttribute("drawingDTO",new DrawingDTO());
         return "/drawing/drawingForm";
     }
 
@@ -82,25 +82,25 @@ public class DefaultDrawingController  {
     // display edit drawing form
     @GetMapping(value = "drawings/{id}/update")
     public String editDrawing(@PathVariable UUID id, Model model){
-        model.addAttribute("existingDrawing", drawingDelegate.findDrawingById(id));
+        model.addAttribute("drawingDTO", drawingDelegate.findDrawingById(id));
         return "/drawing/drawingForm";
     }
 
     // Actually update drawing
     @PostMapping(value = "/drawings")
-    public String updateDrawingData(@ModelAttribute("drawing") @Valid DrawingDTO drawingDTO, Errors errors, Model model) throws ParseException {
+    public String updateDrawingData(@Valid DrawingDTO drawingDTO, Errors errors, Model model) throws ParseException {
         DrawingDTO result = null;
 
 
         if (drawingDTO.getId() == null) {
             if (errors.hasErrors()) {
-                model.addAttribute("existingDrawing", new DrawingDTO());
+                model.addAttribute("drawingDTO", drawingDTO);
                 return "/drawing/drawingForm";
             }
             result = drawingDelegate.addDrawing(drawingDTO);
         } else {
             if (errors.hasErrors()) {
-                model.addAttribute("existingDrawing", drawingDelegate.findDrawingById(drawingDTO.getId()));
+                model.addAttribute("drawingDTO", drawingDTO);
                 return "/drawing/drawingForm";
             }
 

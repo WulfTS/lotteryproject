@@ -29,12 +29,17 @@ public class DefaultTicketService implements TicketService {
     @Override
     public Ticket addTicket(Ticket ticketToAdd) {
         Drawing drawing = drawingService.findDrawingById(ticketToAdd.getDrawingId());
-        if(ticketRepository.findTicketByDrawingId(ticketToAdd.getDrawingId()).size() >= drawing.getMaxTickets()){
-            throw new MaximumTicketsException(drawing.getHumanReadableId() + " " + drawing.getName());
+
+        if (drawing.getMaxTickets() != null) {
+            if (ticketRepository.findTicketByDrawingId(ticketToAdd.getDrawingId()).size() >= drawing.getMaxTickets()) {
+                throw new MaximumTicketsException(drawing.getHumanReadableId() + " " + drawing.getName());
+            }
         }
-        ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getColor()));
-        return ticketRepository.save(ticketToAdd);
+            ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getColor()));
+            return ticketRepository.save(ticketToAdd);
     }
+
+
 
     @Override
     public Ticket editTicket(Ticket ticketUpdates) {

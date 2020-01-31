@@ -7,20 +7,24 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/drawings" modelattribute="drawing" >
+<form method="post" action="/drawings" th:object="${drawingDTO}" >
     <h1> Drawing Form</h1>
 
 
     <table>
         <tr>
             <td>
-                <span>ID: </span>
-                <span th:text = "${existingDrawing.humanReadableId}"></span>
+                <label>Drawing Ref:</label>
+                <span th:text = "*{humanReadableId}"></span>
+                <input th:field="*{humanReadableId}" th:value = "*{humanReadableId}" type="hidden"/>
+
             </td>
             <td>
-                <label>
-                    <input name="id" th:value = "${existingDrawing.id}" type="hidden"/>
-                </label>
+                <span>
+                    <label>
+                        <input th:field="*{id}" th:value = "*{id}" type="hidden"/>
+                    </label>
+                </span>
             </td>
         </tr>
 
@@ -28,22 +32,23 @@
             <td>
                 <label>Name: </label>
                 <label>
-                    <input type="text" name="name"
-                           th:placeholder = "${existingDrawing.name}"
-                           th:value = "${existingDrawing.name}"
+                    <input type="text" th:field="*{name}"
+                           th:placeholder = "*{name}"
+                           th:value = "*{name}"
                     >
                 </label>
+                <span th:errors = "*{name}" class="error"></span>
+
             </td>
-            <td><span class="error"/></td>
         </tr>
 
         <tr>
             <td>
                 <label>Date (YYYY-MM-DD)</label>
                 <label>
-                    <input type="text" name="dateString"
-                           th:placeholder = "${#dates.format(existingDrawing.time, 'yyyy-MM-dd')}"
-                           th:value = "${#dates.format(existingDrawing.time, 'yyyy-MM-dd')}"
+                    <input type="text" th:field="*{dateString}"
+                           th:placeholder = "*{dateString}"
+                           th:value = "*{dateString}"
                     >
                 </label>
             </td></tr>
@@ -53,9 +58,9 @@
             <td>
                 <label>Time (hh:mm)</label>
                 <label>
-                    <input type="text" name="timeString"
-                           th:placeholder = "${#dates.format(existingDrawing.time, 'HH:mm')}"
-                           th:value = "${#dates.format(existingDrawing.time, 'HH:mm')}">
+                    <input type="text" th:field="*{timeString}"
+                           th:placeholder = "*{timeString}"
+                           th:value = "*{timeString}">
                 </label>
             </td></tr>
 
@@ -66,11 +71,13 @@
             <td>
                 <label>Max Tickets</label>
                 <label>
-                    <input type="number" name="maxTickets"
-                           th:placeholder = "${existingDrawing.maxTickets}"
-                           th:value = "${existingDrawing.maxTickets}"
+                    <input type="number" th:field="*{maxTickets}"
+                           th:placeholder = "*{maxTickets}"
+                           th:value = "*{maxTickets}"
                            min="2">
                 </label>
+                <span th:errors = "*{maxTickets}" class="error"></span>
+
             </td></tr>
 
         <tr>

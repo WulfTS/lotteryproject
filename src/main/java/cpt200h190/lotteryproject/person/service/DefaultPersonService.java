@@ -35,9 +35,9 @@ class DefaultPersonService implements PersonService {
 
     @Override
     public Person addPerson(Person personToAdd) {
-        personToAdd.setIsActive(Boolean.TRUE);
-        personToAdd.setHumanReadableId(HumanReadableIdGenerator.GeneratePersonValue(personToAdd.getFirstName(),personToAdd.getLastName()));
-        return personRepository.save(personToAdd);
+            personToAdd.setIsActive(Boolean.TRUE);
+            personToAdd.setHumanReadableId(HumanReadableIdGenerator.GeneratePersonValue(personToAdd.getFirstName(), personToAdd.getLastName()));
+            return personRepository.save(personToAdd);
     }
 
     @Override

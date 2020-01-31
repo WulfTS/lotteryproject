@@ -4,6 +4,7 @@ import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
 import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -28,10 +29,28 @@ public class DefaultDrawingMapper implements DrawingMapper {
 
     @Override
     public DrawingDTO mapDrawingToDrawingDTO(Drawing drawing) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+        String dateString;
+        String timeString;
+
+        if(drawing.getTime() == null){
+            dateString = "";
+            timeString = "";
+        } else{
+            dateString = dateFormat.format(drawing.getTime());
+            timeString = timeFormat.format(drawing.getTime());
+        }
+
+
+
         return DrawingDTO.builder()
                 .id(drawing.getId())
                 .name(drawing.getName())
                 .time(drawing.getTime())
+                .dateString(dateString)
+                .timeString(timeString)
                 .maxTickets(drawing.getMaxTickets())
                 .winningTicketId(drawing.getWinningTicketId())
                 .isActive(drawing.getIsActive())

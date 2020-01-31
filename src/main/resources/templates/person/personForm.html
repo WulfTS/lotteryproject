@@ -6,28 +6,29 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/person/" modelAttribute="person">
+<form method="post" action="/person/" th:object="${personDTO}">
     <h1> Person Form</h1>
     <table>
         <tr>
             <td>
                 <label text = 'Person Ref'> </label>
-                <span th:text = "${existingPerson.humanReadableId}"></span>
+                <span th:field = "*{humanReadableId}"></span>
+                <input th:field="*{humanReadableId}" th:value = "*{humanReadableId}" type="hidden"/>
             </td>
             <td>
                 <label>
-                    <input type="hidden" name="id" th:value = "${existingPerson.id}"/>
+                    <input type="hidden" th:field ="*{id}" th:value = "*{id}"/>
                 </label>
             </td>
         </tr>
         <tr>
             <td>
                 <span>Active: </span>
-                <span th:text = "${existingPerson.isActive}"></span>
+                <span th:field = "*{isActive}"></span>
             </td>
             <td>
                 <label>
-                    <input type="hidden" name="isActive" th:value = "${existingPerson.isActive}"/>
+                    <input type="hidden" th:field="*{isActive}" th:value = "*{isActive}"/>
                 </label>
             </td>
         </tr>
@@ -35,43 +36,49 @@
         <tr>
             <td>
                 <label>First Name: </label>
-                <label>
-                    <input type="text" name="firstName"
-                           th:placeholder="${existingPerson.firstName}"
-                           th:value = "${existingPerson.firstName}"
-                    >
-                </label>
+
+                    <label>
+                        <input type="text" th:field="*{firstName}"
+                             th:placeholder="${firstName}"
+                             th:value = "*{firstName}"
+                        >
+                    </label>
+                    <span th:errors = "*{firstName}" class="error"></span>
             </td>
         </tr>
         <tr
         ><td>
             <label> Last Name: </label>
             <label>
-                <input type="text" name="lastName"
-                       th:placeholder = "${existingPerson.lastName}"
-                       th:value = "${existingPerson.lastName}"
+                <input type="text" th:field="*{lastName}"
+                       th:placeholder = "*{lastName}"
+                       th:value = "*{lastName}"
                 >
             </label>
+            <span th:errors = "*{lastName}" class="error"></span>
+
         </td>
         </tr>
         <tr>
             <td>
                 <label> Email </label>
                 <label>
-                    <input type="text" name="email"
-                           th:placeholder = "${existingPerson.email}"
-                           th:value = "${existingPerson.email}"
+                    <input type="text" th:field="*{email}"
+                           th:placeholder = "*{email}"
+                           th:value = "*{email}"
                     >
                 </label>
+                <span th:errors = "*{email}" class="error"></span>
+
             </td>
         </tr>
         <tr>
             <td>
                 <label>Phone</label>
                 <label>
-                    <input type="text" name="phoneNumber"
-                           th:placeholder = "${existingPerson.phoneNumber}"
-                           th:value = "${existingPerson.phoneNumber}"
+                    <input type="text" th:field="*{phoneNumber}"
+                           th:placeholder = "*{phoneNumber}"
+                           th:value = "*{phoneNumber}"
                     >
                 </label>
             </td></tr>

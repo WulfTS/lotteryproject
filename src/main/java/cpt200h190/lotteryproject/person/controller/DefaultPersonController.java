@@ -47,7 +47,7 @@ public class DefaultPersonController {
     // display person form
     @GetMapping("people/add")
     public String displayPersonForm(Model model){
-        model.addAttribute("existingPerson",new PersonDTO());
+        model.addAttribute("personDTO",new PersonDTO());
         return "person/personForm";
     }
 
@@ -87,24 +87,24 @@ public class DefaultPersonController {
     //Display update form
     @GetMapping(value="/person/{id}/update")
     public String displayUpdateForm(@PathVariable UUID id,  Model model){
-        model.addAttribute("existingPerson", personDelegate.findPersonById(id));
+        model.addAttribute("personDTO", personDelegate.findPersonById(id));
         return "/person/personForm";
     }
 
     // actually update person
     @PostMapping(value ="/person/" )
-    public String updatePersonData(@ModelAttribute("person") @Valid PersonDTO personDTO, Errors errors, Model model){
+    public String updatePersonData(@Valid PersonDTO personDTO, Errors errors, Model model){
         PersonDTO result = null;
 
         if(personDTO.getId()== null){
             if(errors.hasErrors()){
-                model.addAttribute("existingPerson",new PersonDTO());
+                model.addAttribute("personDTO",personDTO);
                 return "/person/personForm";
             }
             result = personDelegate.addPerson(personDTO);
         } else {
             if(errors.hasErrors()){
-                model.addAttribute("existingPerson",personDelegate.findPersonById(personDTO.getId()));
+                model.addAttribute("personDTO",personDTO);
                 return "/person/personForm";
             }
             result = personDelegate.editPerson(personDTO);
