@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -20,6 +23,7 @@ import java.util.UUID;
 public class Ticket {
 
     private static HumanReadableIdGenerator humanReadableIdGenerator;
+    public static List<String> types = new ArrayList<>(Arrays.asList("GEN","PREM"));
 
 
     @Id
@@ -30,7 +34,7 @@ public class Ticket {
 
     private String humanReadableId;
 
-    private String color;
+    private String type;
 
     private UUID drawingId;
 
@@ -38,54 +42,57 @@ public class Ticket {
 
     public Ticket(UUID drawingId){
         this.drawingId = drawingId;
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.type = types.get(0);
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
     }
 
     public Ticket(UUID drawingId, UUID personId){
         this.drawingId = drawingId;
         this.personId = personId;
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
-
+        this.type = types.get(0);
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
     }
 
     public Ticket(DrawingDTO drawingDTO){
         this.drawingId = drawingDTO.getId();
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.type = types.get(0);
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
 
     }
 
     public Ticket(DrawingDTO drawingDTO, PersonDTO personDTO){
         this.drawingId = drawingDTO.getId();
         this.personId = personDTO.getId();
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.type = types.get(0);
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
 
     }
 
-    public Ticket(UUID drawingId, String color){
+    public Ticket(UUID drawingId, String type){
         this.drawingId = drawingId;
-        this.color = color;
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.type = types.get(0);
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
     }
 
-    public Ticket(UUID drawingId, UUID personId, String color){
+    public Ticket(UUID drawingId, UUID personId, String type){
         this.drawingId = drawingId;
         this.personId = personId;
-        this.color = color;
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.type = type;
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
 
     }
 
-    public Ticket(DrawingDTO drawingDTO, String color){
+    public Ticket(DrawingDTO drawingDTO, String type){
         this.drawingId = drawingDTO.getId();
-        this.color = color;
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.type = type;
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
 
     }
 
-    public Ticket(DrawingDTO drawingDTO, PersonDTO personDTO, String color){
+    public Ticket(DrawingDTO drawingDTO, PersonDTO personDTO, String type){
         this.drawingId = drawingDTO.getId();
         this.personId = personDTO.getId();
-        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(color);
+        this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
 
     }
 

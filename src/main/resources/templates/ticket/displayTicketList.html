@@ -32,7 +32,7 @@
             <a th:href="${'/tickets/' + {ticket.id}}">View</a>
         </td>
         <td>
-            <a th:href="${'/tickets/' + {ticket.id}} + '/update'">Update</a>
+            <a th:href="${'/tickets/' + {ticket.id}} + '/update'" th:text ="${ticket.personId != null} ?  ' ' : 'Update'"></a>
         </td>
     </tr>
 

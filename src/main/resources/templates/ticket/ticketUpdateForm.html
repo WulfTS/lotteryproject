@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/tickets/update">
+    <h1> Ticket Form</h1>
+    <table>
+        <td>
+                <span>
+                    <label>
+                        <input th:name = "id" th:value = "${ticketDTO.id}" type="hidden"/>
+                    </label>
+                </span>
+        </td>
+        <td>
+                <span>
+                    <label>
+                        <input th:name = "drawingId" th:value = "${ticketDTO.drawingId}" type="hidden"/>
+                    </label>
+                </span>
+        </td>
+        <tr>
+            <label><td>Ticket Ref</td></label>
+            <td>
+                <span th:text = "${ticketDTO.humanReadableId}"></span>
+            </td>
+        <tr>
+        <tr>
+            <td>
+                <label>Drawing Ref: </label>
+            </td>
+            <td>
+                <span th:text = "${drawingDelegate.findDrawingById({ticketDTO.drawingId}).getHumanReadableId()}"></span>
+            </td>
+        </tr>
+         <tr>
+             <td>
+                 <label>Person</label>
+            </td>
+            <td>
+                <select id = "personId" name = "personId">
+                    <option value="">Select Person</option>
+                    <option th:each="person : ${peopleList}"
+                            th:value = "${person.getId()}"
+                            th:text = "${person.getFirstName()} + ' ' + ${person.getLastName()}"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+                <button type = "reset">Reset</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+
+
+</body>
+</html>

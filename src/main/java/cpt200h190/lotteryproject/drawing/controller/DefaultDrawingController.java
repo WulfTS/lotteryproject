@@ -129,13 +129,21 @@ public class DefaultDrawingController  {
 
     @GetMapping(value = "/drawings/drawWinner")
     public String displayDrawWinnerForm(Model model){
+        model.addAttribute("message","");
         model.addAttribute("drawingList",drawingDelegate.findActiveDrawings());
         return  "/drawing/drawWinner";
     }
 
     @PostMapping(value = "/drawings/drawIndividualWinner")
-    public String displayWinner(@ModelAttribute DrawingDTO drawingDTO, Model model){
+    public String displayWinner(@ModelAttribute DrawingDTO drawingDTO, Model model,Error error){
+
+        if(drawingDTO.getId() == null){
+            model.addAttribute("message","Drawing ID must be selected");
+            model.addAttribute("drawingList",drawingDelegate.findActiveDrawings());
+            return  "/drawing/drawWinner";
+        }
         DrawingDTO result = drawingDelegate.drawWinner(drawingDTO.getId());
+
         model.addAttribute("drawing",result);
         model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(drawingDTO.getId()));
         model.addAttribute("drawingDelegate",drawingDelegate);

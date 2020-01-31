@@ -19,6 +19,9 @@
                     <option th:each="drawing : ${drawingList}" th:value = "${drawing.getId()}" th:text = "${drawing.getName()}" name = "drawing.id"></option>
                 </select>
             </td>
+            <td th:text =${message}>
+
+            </td>
 
 
         <tr>

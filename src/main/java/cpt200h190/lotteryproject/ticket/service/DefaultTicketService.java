@@ -35,7 +35,7 @@ public class DefaultTicketService implements TicketService {
                 throw new MaximumTicketsException(drawing.getHumanReadableId() + " " + drawing.getName());
             }
         }
-            ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getColor()));
+            ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getType()));
             return ticketRepository.save(ticketToAdd);
     }
 

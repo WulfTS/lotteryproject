@@ -10,25 +10,23 @@
 <table>
 
     <tr>
-        <label><td>Ticket ID</td></label>
+        <label><td>Ticket Ref</td></label>
 
         <td>
             <span th:text = "${ticket.humanReadableId}"></span>
         </td>
     <tr>
-        <label><td>Drawing ID</td></label>
+        <label><td>Drawing Ref</td></label>
         <td>
             <span th:text = "${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"></span>
         </td>
         <td>
-        <td><a th:href="${'/drawing/' + {ticket.drawingId}}" th:text="${drawingName} ?: ''"></a></td>
+        <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingName} ?: ''"></a></td>
         </td>
     </tr>
     <tr>
-        <label><td>Person ID</td></label>
-        <td>
-            <span th:text = "${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"></span>
-        </td>
+        <label><td>Person Ref</td></label>
+        <td th:text="${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()} : ''" ></td>
         <td>
         <td><a th:href="${'/person/' + {ticket.personId}}" th:text="${personName} ?: ''"></a></td>
         </td>
