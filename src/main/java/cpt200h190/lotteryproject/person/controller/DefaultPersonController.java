@@ -69,7 +69,7 @@ public class DefaultPersonController {
     public String displayInactivePeople(Model model){
         List<PersonDTO> peopleList = personDelegate.getInactivePeopleList();
         model.addAttribute("peopleList",peopleList);
-        return "person/displayPeopleList";
+        return "person/displayPersonList";
     }
 
 

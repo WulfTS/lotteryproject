@@ -57,13 +57,15 @@
     <table>
         <th style="display: none">Ticket ID</th>
         <th>Ticket Reference</th>
+        <th>Drawing Reference</th>
         <th>Person Reference</th>
         <th>Person Name</th>
-        <th>Drawing Reference</th>
 
         <tr th:each="ticket: ${ticketList}">
             <td style="display:none;" th:text="${ticket.id}"/>
             <td th:text = "${ticket.humanReadableId}">
+            <td th:text = "${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
+
             <td th:text="${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
             <td th:if="${ticket.personId != null}">
                 <a th:href="${'/person/' + {ticket.personId}}"
@@ -74,7 +76,6 @@
             </td>
 
             </td>
-            <td th:text = "${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
         </tr>
 
 
