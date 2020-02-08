@@ -59,5 +59,24 @@ public class DefaultTicketDelegate implements TicketDelegate {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deactivateTicket(UUID ticketId) {
+        ticketService.deactivateTicket(ticketId);
+    }
+
+    @Override
+    public List<TicketDTO> findTicketByDrawingIdAndIsActive(UUID drawingId, Boolean isActive) {
+        return ticketService.findTicketByDrawingIdAndIsActive(drawingId,isActive).stream()
+                .map(ticketMapper::mapTicketToTicketDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TicketDTO> findTicketsByIsActive(Boolean isActive) {
+        return ticketService.findTicketByIsActive(isActive).stream()
+                .map(ticketMapper::mapTicketToTicketDTO)
+                .collect(Collectors.toList());
+    }
+
 
 }

@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
-import java.util.UUID;
 
 @Configuration
 @Slf4j
@@ -41,10 +40,6 @@ public class LoadDatabase {
             log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(2).getId(),personRepository.findAll().get(2).getId())));
             log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(3).getId(),personRepository.findAll().get(3).getId())));
 
-
-
-
         };
     }
-
 }

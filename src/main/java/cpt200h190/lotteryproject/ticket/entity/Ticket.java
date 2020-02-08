@@ -40,10 +40,13 @@ public class Ticket {
 
     private UUID personId;
 
+    private Boolean isActive;
+
     public Ticket(UUID drawingId){
         this.drawingId = drawingId;
         this.type = types.get(0);
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
+        this.isActive = true;
     }
 
     public Ticket(UUID drawingId, UUID personId){
@@ -51,12 +54,14 @@ public class Ticket {
         this.personId = personId;
         this.type = types.get(0);
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
+        this.isActive = true;
     }
 
     public Ticket(DrawingDTO drawingDTO){
         this.drawingId = drawingDTO.getId();
         this.type = types.get(0);
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
+        this.isActive = true;
 
     }
 
@@ -65,6 +70,7 @@ public class Ticket {
         this.personId = personDTO.getId();
         this.type = types.get(0);
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
+        this.isActive = true;
 
     }
 
@@ -72,6 +78,7 @@ public class Ticket {
         this.drawingId = drawingId;
         this.type = types.get(0);
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
+        this.isActive = true;
     }
 
     public Ticket(UUID drawingId, UUID personId, String type){
@@ -79,21 +86,21 @@ public class Ticket {
         this.personId = personId;
         this.type = type;
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
-
+        this.isActive = true;
     }
 
     public Ticket(DrawingDTO drawingDTO, String type){
         this.drawingId = drawingDTO.getId();
         this.type = type;
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
-
+        this.isActive = true;
     }
 
     public Ticket(DrawingDTO drawingDTO, PersonDTO personDTO, String type){
         this.drawingId = drawingDTO.getId();
         this.personId = personDTO.getId();
         this.humanReadableId = HumanReadableIdGenerator.GenerateTicketValue(type);
-
+        this.isActive = true;
     }
 
 }

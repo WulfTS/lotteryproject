@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DefaultDrawingController  {
+public class DrawingController {
     private final DrawingDelegate drawingDelegate;
     private final TicketDelegate ticketDelegate;
     private final PersonDelegate personDelegate;

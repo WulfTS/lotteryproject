@@ -28,4 +28,7 @@ public class TicketDTO {
 
     @JsonProperty
     private UUID personId;
+
+    @JsonProperty
+    private Boolean isActive;
 }

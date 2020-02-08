@@ -31,6 +31,13 @@
         <td><a th:href="${'/person/' + {ticket.personId}}" th:text="${personName} ?: ''"></a></td>
         </td>
     </tr>
+    <tr>
+        <label><td>Active?</td></label>
+
+        <td>
+            <span th:text = "${ticket.isActive}"></span>
+        </td>
+    <tr>
 
     <tr>
         <td><a href="/" > home </a></td>

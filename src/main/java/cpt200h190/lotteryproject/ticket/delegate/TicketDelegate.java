@@ -18,4 +18,11 @@ public interface TicketDelegate {
     List<TicketDTO> findTicketsByDrawingId(UUID drawingId);
 
     List<TicketDTO> findTicketByPersonId(UUID personId);
+
+    void deactivateTicket(UUID ticketId);
+
+    List<TicketDTO> findTicketByDrawingIdAndIsActive(UUID drawingId, Boolean isActive);
+
+    List<TicketDTO> findTicketsByIsActive(Boolean isActive);
+
 }

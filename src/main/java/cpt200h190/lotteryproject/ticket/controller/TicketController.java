@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DefaultTicketController {
+public class TicketController {
     private final TicketDelegate ticketDelegate;
     private final DrawingDelegate drawingDelegate;
     private final PersonDelegate personDelegate;
@@ -139,6 +139,31 @@ public class DefaultTicketController {
             model.addAttribute("drawingDelegate", drawingDelegate);
 
             return "/ticket/displayTicket";
+    }
+
+    @GetMapping(value = "/tickets/{id}/deactivate")
+    public String cancelTicket(@PathVariable UUID id, Model model){
+        ticketDelegate.deactivateTicket(id);
+        TicketDTO results = ticketDelegate.findTicketById(id);
+        model.addAttribute("ticket", results);
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+        return "redirect:/tickets/all";
+    }
+
+    @GetMapping(value = "/tickets/active")
+    public String getActiveTickets(Model model){
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByIsActive(true));
+        model.addAttribute("drawingDelegate", drawingDelegate);
+        model.addAttribute("personDelegate", personDelegate);
+        return "/ticket/displayTicketList";
+    }
+
+    @GetMapping(value = "/tickets/inactive")
+    public String getInactiveTickets(Model model){
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByIsActive(false));
+        model.addAttribute("drawingDelegate", drawingDelegate);
+        model.addAttribute("personDelegate", personDelegate);
+        return "/ticket/displayTicketList";
     }
 
 }

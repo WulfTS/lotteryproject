@@ -14,8 +14,10 @@
         <th>Drawing Ref</th>
         <th>Person</th>
         <th>Person Ref</th>
+        <th>Active</th>
         <th>View</th>
         <th>Update</th>
+        <th>Deactivate</th>
     </tr>
 
     <tr th:each="ticket: ${ticketList}">
@@ -28,11 +30,17 @@
 
        </td>
         <td th:text = "${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
+
+        <td th:text = "${ticket.isActive}"/>
+
         <td>
             <a th:href="${'/tickets/' + {ticket.id}}">View</a>
         </td>
         <td>
-            <a th:href="${'/tickets/' + {ticket.id}} + '/update'" th:text ="${ticket.personId != null} ?  ' ' : 'Update'"></a>
+            <a th:href="${'/tickets/' + {ticket.id}} + '/update'" th:text ="${ticket.personId != null || ticket.isActive == false} ?  ' ' : 'Update'"></a>
+        </td>
+        <td>
+            <a th:href="${'/tickets/' + {ticket.id}} + '/deactivate'" th:text ="${ticket.isActive != false} ?  'Deactivate' : ' '"></a>
         </td>
     </tr>
 

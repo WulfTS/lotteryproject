@@ -13,6 +13,7 @@ public class DefaultTicketMapper implements TicketMapper {
                 .drawingId(ticketDTO.getDrawingId())
                 .personId(ticketDTO.getPersonId())
                 .humanReadableId(ticketDTO.getHumanReadableId())
+                .isActive(ticketDTO.getIsActive())
                 .build();
     }
 
@@ -23,6 +24,7 @@ public class DefaultTicketMapper implements TicketMapper {
                 .drawingId(ticket.getDrawingId())
                 .personId(ticket.getPersonId())
                 .humanReadableId(ticket.getHumanReadableId())
+                .isActive(ticket.getIsActive())
                 .build();
     }
 }

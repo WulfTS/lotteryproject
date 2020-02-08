@@ -35,6 +35,7 @@ public class DefaultTicketService implements TicketService {
                 throw new MaximumTicketsException(drawing.getHumanReadableId() + " " + drawing.getName());
             }
         }
+            ticketToAdd.setIsActive(true);
             ticketToAdd.setHumanReadableId(HumanReadableIdGenerator.GenerateTicketValue(ticketToAdd.getType()));
             return ticketRepository.save(ticketToAdd);
     }
@@ -55,6 +56,10 @@ public class DefaultTicketService implements TicketService {
         if(ticketUpdates.getPersonId() == null){
             ticketUpdates.setPersonId(existingTicket.getPersonId());
         }
+        if(ticketUpdates.getIsActive() == null){
+            ticketUpdates.setIsActive(existingTicket.getIsActive());
+        }
+
         ticketUpdates.setHumanReadableId(existingTicket.getHumanReadableId());
 
         return ticketRepository.save(ticketUpdates);
@@ -75,6 +80,23 @@ public class DefaultTicketService implements TicketService {
         return ticketRepository.findTicketByPersonId(personId);
     }
 
+    @Override
+    public void deactivateTicket(UUID ticketId) {
+        Ticket ticket = findTicketById(ticketId);
+        ticket.setIsActive(false);
+        ticketRepository.save(ticket);
+    }
+
+    @Override
+    public List<Ticket> findTicketByDrawingIdAndIsActive(UUID drawingId, Boolean isActive) {
+        return ticketRepository.findTicketByDrawingIdAndIsActive(drawingId,isActive);
+    }
+
+    @Override
+    public List<Ticket> findTicketByIsActive(Boolean isActive) {
+        return ticketRepository.findTicketByIsActive(isActive);
+    }
+
 
     private Boolean idIsPresent(UUID id){
         Optional<Ticket> one = ticketRepository.findById(id);
@@ -84,4 +106,6 @@ public class DefaultTicketService implements TicketService {
         }
         return Boolean.FALSE;
     }
+
+
 }

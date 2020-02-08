@@ -82,7 +82,7 @@ public class DefaultDrawingService implements DrawingService {
     public Drawing drawWinner(UUID id) {
 
         Drawing drawing = findDrawingById(id);
-        List<Ticket> ticketList = ticketService.findTicketsByDrawingId(id);
+        List<Ticket> ticketList = ticketService.findTicketByDrawingIdAndIsActive(id,true);
         Random random = new Random();
 
         if(ticketList.size() == 0){
@@ -94,6 +94,12 @@ public class DefaultDrawingService implements DrawingService {
       if(drawing.getWinningTicketId() == null ){
           drawing.setWinningTicketId(winningTicket.getId());
           drawing.setIsActive(Boolean.FALSE);
+
+          ticketList.forEach(ticket -> {
+              ticket.setIsActive(false);
+              ticketService.editTicket(ticket);
+          });
+
 
       } else {
           // do nothing since a winner for this drawing has already been selected.
