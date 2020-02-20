@@ -130,6 +130,13 @@ public class DefaultDrawingService implements DrawingService {
     }
 
 
+    @Override
+    public void activateDrawing(UUID id) {
+        Drawing drawing = findDrawingById(id);
+        drawing.setIsActive(Boolean.TRUE);
+        drawingRepository.save(drawing);
+    }
+
     private Boolean idIsPresent(UUID id) {
 
         Optional<Drawing> one = drawingRepository.findById(id);

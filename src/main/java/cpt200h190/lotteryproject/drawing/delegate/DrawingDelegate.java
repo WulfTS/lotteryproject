@@ -21,4 +21,5 @@ public interface DrawingDelegate {
     List<DrawingDTO> findInactiveDrawings();
 
     void cancelDrawing(UUID id);
+    void activateDrawing(UUID id);
 }

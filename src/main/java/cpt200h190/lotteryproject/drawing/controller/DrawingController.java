@@ -161,4 +161,13 @@ public class DrawingController {
         return "redirect:/drawings/all";
     }
 
+    @GetMapping(value = "/drawing/{id}/activate")
+    public String activate(@PathVariable UUID id, Model model){
+        drawingDelegate.activateDrawing(id);
+        DrawingDTO results = drawingDelegate.findDrawingById(id);
+        model.addAttribute("drawing", results);
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByDrawingId(id));
+        return "redirect:/drawings/all";
+    }
+
 }

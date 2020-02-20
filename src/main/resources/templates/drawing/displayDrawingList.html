@@ -18,6 +18,7 @@
         <th>Update</th>
         <th>Draw</th>
         <th>Cancel</th>
+        <th>Activate</th>
         <th>Winning Ticket</th>
         <th>Person</th>
 
@@ -44,6 +45,9 @@
         </td>
         <td >
             <a th:href="${'/drawing/' + {drawing.id}} + '/cancel'" th:text = "${drawing.isActive != true} ? ' ': 'Cancel'"></a>
+        </td>
+        <td >
+            <a th:href="${'/drawing/' + {drawing.id}} + '/activate'" th:text = "${drawing.isActive != true && drawing.winningTicketId == null} ? 'Activate': ' '"></a>
         </td>
 
         <td th:text="${drawing.winningTicketId != null} ? ${ticketDelegate.findTicketById(drawing.winningTicketId).getHumanReadableId()}"/>

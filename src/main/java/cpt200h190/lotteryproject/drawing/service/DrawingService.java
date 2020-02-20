@@ -21,5 +21,5 @@ public interface DrawingService {
     List<Drawing> findInactiveDrawings();
 
     void cancelDrawing(UUID id);
-
+    void activateDrawing(UUID id);
 }

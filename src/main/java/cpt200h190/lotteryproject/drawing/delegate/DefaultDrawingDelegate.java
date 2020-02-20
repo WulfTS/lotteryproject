@@ -99,5 +99,7 @@ public class DefaultDrawingDelegate implements DrawingDelegate {
         drawingService.cancelDrawing(id);
     }
 
+    @Override
+    public void activateDrawing(UUID id){drawingService.activateDrawing(id);}
 
 }
