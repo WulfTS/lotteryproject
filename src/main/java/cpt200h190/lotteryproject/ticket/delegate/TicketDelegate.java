@@ -25,4 +25,6 @@ public interface TicketDelegate {
 
     List<TicketDTO> findTicketsByIsActive(Boolean isActive);
 
+    List<TicketDTO> findTicketsByIsWinner(Boolean isWinner);
+
 }

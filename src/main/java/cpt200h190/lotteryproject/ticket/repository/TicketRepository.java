@@ -12,6 +12,7 @@ public interface TicketRepository extends JpaRepository<Ticket, UUID> {
     List<Ticket> findTicketByDrawingId(UUID drawingId);
     List<Ticket> findTicketByPersonId(UUID personId);
     List<Ticket> findTicketByIsActive(Boolean isActive);
+    List<Ticket> findTicketByIsWinner(Boolean isWinner);
     List<Ticket> findTicketByDrawingIdAndIsActive(UUID drawingId, Boolean isActive);
 
 }

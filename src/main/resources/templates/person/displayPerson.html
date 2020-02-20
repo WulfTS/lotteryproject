@@ -61,6 +61,7 @@
             <th>Person Ref</th>
             <th>Drawing Ref</th>
             <th>Drawing Name</th>
+            <th>Winner?</th>
 
         </tr>
 
@@ -69,6 +70,8 @@
             <td th:text="${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
             <td th:text="${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
             <td><a th:href="${'/drawings/' + {ticket.drawingId}}" th:text="${drawingDelegate.findDrawingById(ticket.drawingId).getName()}"/></td>
+            <td th:text="${ticket.isWinner}"/>
+
         </tr>
 
 

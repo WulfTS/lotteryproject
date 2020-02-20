@@ -18,6 +18,8 @@ public interface TicketService {
 
     List<Ticket> findTicketByPersonId(UUID personId);
 
+    List<Ticket> findTicketByIsWinner(Boolean isWinner);
+
     void deactivateTicket(UUID ticketId);
 
     List<Ticket> findTicketByDrawingIdAndIsActive(UUID drawingId, Boolean isActive);

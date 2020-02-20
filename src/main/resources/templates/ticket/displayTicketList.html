@@ -15,6 +15,7 @@
         <th>Person</th>
         <th>Person Ref</th>
         <th>Active</th>
+        <th>Winner</th>
         <th>View</th>
         <th>Update</th>
         <th>Deactivate</th>
@@ -32,6 +33,9 @@
         <td th:text = "${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
 
         <td th:text = "${ticket.isActive}"/>
+
+        <td th:text = "${ticket.isWinner}"/>
+
 
         <td>
             <a th:href="${'/tickets/' + {ticket.id}}">View</a>

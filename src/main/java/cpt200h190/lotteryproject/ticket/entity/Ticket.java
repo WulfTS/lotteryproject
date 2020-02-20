@@ -42,6 +42,8 @@ public class Ticket {
 
     private Boolean isActive;
 
+    private Boolean isWinner;
+
     public Ticket(UUID drawingId){
         this.drawingId = drawingId;
         this.type = types.get(0);

@@ -31,4 +31,7 @@ public class TicketDTO {
 
     @JsonProperty
     private Boolean isActive;
+
+    @JsonProperty
+    private Boolean isWinner;
 }

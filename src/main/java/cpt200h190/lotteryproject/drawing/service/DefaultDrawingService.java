@@ -97,6 +97,11 @@ public class DefaultDrawingService implements DrawingService {
 
           ticketList.forEach(ticket -> {
               ticket.setIsActive(false);
+              if(ticket.getId() == winningTicket.getId()){
+                  ticket.setIsWinner(true);
+              } else {
+                  ticket.setIsWinner(false);
+              }
               ticketService.editTicket(ticket);
           });
 

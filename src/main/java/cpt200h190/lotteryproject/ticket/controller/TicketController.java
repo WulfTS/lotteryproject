@@ -1,5 +1,6 @@
 package cpt200h190.lotteryproject.ticket.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import cpt200h190.lotteryproject.drawing.delegate.DrawingDelegate;
 import cpt200h190.lotteryproject.drawing.dto.DrawingDTO;
 import cpt200h190.lotteryproject.person.delegate.PersonDelegate;
@@ -161,6 +162,14 @@ public class TicketController {
     @GetMapping(value = "/tickets/inactive")
     public String getInactiveTickets(Model model){
         model.addAttribute("ticketList", ticketDelegate.findTicketsByIsActive(false));
+        model.addAttribute("drawingDelegate", drawingDelegate);
+        model.addAttribute("personDelegate", personDelegate);
+        return "/ticket/displayTicketList";
+    }
+
+    @GetMapping(value = "/tickets/winners")
+    public String getWinningTickets(Model model){
+        model.addAttribute("ticketList", ticketDelegate.findTicketsByIsWinner(true));
         model.addAttribute("drawingDelegate", drawingDelegate);
         model.addAttribute("personDelegate", personDelegate);
         return "/ticket/displayTicketList";

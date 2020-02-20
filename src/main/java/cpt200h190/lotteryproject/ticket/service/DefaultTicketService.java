@@ -81,6 +81,11 @@ public class DefaultTicketService implements TicketService {
     }
 
     @Override
+    public List<Ticket> findTicketByIsWinner(Boolean isWinner) {
+        return ticketRepository.findTicketByIsWinner(isWinner);
+    }
+
+    @Override
     public void deactivateTicket(UUID ticketId) {
         Ticket ticket = findTicketById(ticketId);
         ticket.setIsActive(false);
@@ -96,6 +101,7 @@ public class DefaultTicketService implements TicketService {
     public List<Ticket> findTicketByIsActive(Boolean isActive) {
         return ticketRepository.findTicketByIsActive(isActive);
     }
+
 
 
     private Boolean idIsPresent(UUID id){

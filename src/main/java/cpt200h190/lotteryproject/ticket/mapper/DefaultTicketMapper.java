@@ -14,6 +14,7 @@ public class DefaultTicketMapper implements TicketMapper {
                 .personId(ticketDTO.getPersonId())
                 .humanReadableId(ticketDTO.getHumanReadableId())
                 .isActive(ticketDTO.getIsActive())
+                .isWinner(ticketDTO.getIsWinner())
                 .build();
     }
 
@@ -25,6 +26,7 @@ public class DefaultTicketMapper implements TicketMapper {
                 .personId(ticket.getPersonId())
                 .humanReadableId(ticket.getHumanReadableId())
                 .isActive(ticket.getIsActive())
+                .isWinner(ticket.getIsWinner())
                 .build();
     }
 }

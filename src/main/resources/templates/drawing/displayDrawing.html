@@ -59,6 +59,7 @@
         <th style="display: none">Ticket ID</th>
         <th>Ticket Reference</th>
         <th>Active?</th>
+        <th>Winner?</th>
         <th>Drawing Reference</th>
         <th>Person Reference</th>
         <th>Person Name</th>
@@ -67,6 +68,7 @@
             <td style="display:none;" th:text="${ticket.id}"/>
             <td th:text = "${ticket.humanReadableId}">
             <td th:text = "${ticket.isActive}">
+            <td th:text = "${ticket.isWinner}">
             <td th:text = "${drawingDelegate.findDrawingById(ticket.drawingId).getHumanReadableId()}"/>
             <td th:text="${ticket.personId != null} ? ${personDelegate.findPersonById(ticket.personId).getHumanReadableId()}"/>
             <td th:if="${ticket.personId != null}">

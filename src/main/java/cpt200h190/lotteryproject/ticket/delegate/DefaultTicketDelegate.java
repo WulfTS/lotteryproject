@@ -78,5 +78,12 @@ public class DefaultTicketDelegate implements TicketDelegate {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TicketDTO> findTicketsByIsWinner(Boolean isWinner) {
+        return ticketService.findTicketByIsWinner(isWinner).stream()
+                .map(ticketMapper:: mapTicketToTicketDTO)
+                .collect(Collectors.toList());
+    }
+
 
 }
