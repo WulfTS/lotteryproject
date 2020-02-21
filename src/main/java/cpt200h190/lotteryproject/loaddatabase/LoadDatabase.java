@@ -4,6 +4,8 @@ import cpt200h190.lotteryproject.drawing.entity.Drawing;
 import cpt200h190.lotteryproject.drawing.repository.DrawingRepository;
 import cpt200h190.lotteryproject.person.entity.Person;
 import cpt200h190.lotteryproject.person.repository.PersonRepository;
+import cpt200h190.lotteryproject.prize.entity.Prize;
+import cpt200h190.lotteryproject.prize.repository.PrizeRepository;
 import cpt200h190.lotteryproject.ticket.entity.Ticket;
 import cpt200h190.lotteryproject.ticket.repository.TicketRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +20,7 @@ import java.text.SimpleDateFormat;
 public class LoadDatabase {
 
     @Bean
-    CommandLineRunner initDatabase(PersonRepository personRepository, DrawingRepository drawingRepository, TicketRepository ticketRepository){
+    CommandLineRunner initDatabase(PersonRepository personRepository, DrawingRepository drawingRepository, TicketRepository ticketRepository, PrizeRepository prizeRepository){
         return args -> {
             log.info("Preloading: " + personRepository.save(new Person("Test 1", "Person 1", "fleakrlprojects@gmail.com","555-555-5555")));
             log.info("Preloading: " + personRepository.save(new Person("Test 2", "Person 2", "fleakrlprojects@gmail.com","888-888-8888")));
@@ -39,6 +41,9 @@ public class LoadDatabase {
             log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(1).getId(),personRepository.findAll().get(2).getId())));
             log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(2).getId(),personRepository.findAll().get(2).getId())));
             log.info("Preloading: " + ticketRepository.save(new Ticket(drawingRepository.findAll().get(3).getId(),personRepository.findAll().get(3).getId())));
+            log.info("Preloading: " + prizeRepository.save(new Prize("Prize 1",drawingRepository.findAll().get(0).getId())));
+            log.info("Preloading: " + prizeRepository.save(new Prize("Prize 2",drawingRepository.findAll().get(1).getId())));
+
 
         };
     }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <h1>Prize Summary</h1>
+    <tr>
+        <th style="display: none">Prize Number</th>
+        <th>Prize Ref</th>
+        <th>Description</th>
+        <th>Drawing Name</th>
+        <th>Drawing Ref</th>
+        <th>Active</th>
+        <th>View</th>
+        <th>Update</th>
+        <th>Deactivate</th>
+    </tr>
+
+    <tr th:each="prize: ${prizeList}">
+        <td style="display: none" th:text="${prize.id}"/>
+        <td th:text = "${prize.humanReadableId}"/>
+        <td><a th:href="${'/drawings/' + {prize.drawingId}}" th:text="${drawingDelegate.findDrawingById(prize.drawingId).getName()}"/></td>
+        <td th:text = "${drawingDelegate.findDrawingById(prize.drawingId).getHumanReadableId()}"/>
+        <td th:text = "${prize.isActive}"/>
+
+        <td>
+            <a th:href="${'/prizes/' + {prize.id}}">View</a>
+        </td>
+        <td>
+            <a th:href="${'/prizes/' + {prize.id}} + '/update'" th:text ="${prize.isActive == false} ?  ' ' : 'Update'"></a>
+        </td>
+        <td>
+            <a th:href="${'/prizes/' + {prize.id}} + '/changestatus'" th:text ="${prize.isActive != false} ?  'Deactivate' : 'Activate'"></a>
+        </td>
+    </tr>
+
+    <tr>
+        <td><a href="/" > home </a></td>
+        <td><a href="/people" > people </a></td>
+        <td><a href="/drawings" > drawings </a></td>
+        <td><a href="/tickets" > tickets </a></td>
+
+
+
+    </tr>
+</table>
+
+</body>
+</html>

@@ -41,7 +41,7 @@ public class Prize {
     @NotNull
     Boolean isActive;
 
-    Prize(String description, UUID drawingId){
+    public Prize(String description, UUID drawingId){
         this.description = description;
         this.humanReadableId = HumanReadableIdGenerator.GeneratePrizeValue(description);
         this.drawingId = drawingId;
