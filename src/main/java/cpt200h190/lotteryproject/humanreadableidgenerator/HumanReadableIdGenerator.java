@@ -41,4 +41,10 @@ public interface HumanReadableIdGenerator {
         return stringVal + Integer.toString(random.nextInt(999999));
     }
 
+    static String GeneratePrizeValue(String description) {
+        String stringVal = "PRZ";
+        Random random = new Random();
+        return stringVal+ description.substring(0,3) + Integer.toString(random.nextInt(999999));
+    }
+
 }
